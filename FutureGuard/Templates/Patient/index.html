@@ -1,4 +1,10 @@
-<!doctype html>
+{% extends 'base.html' %} 
+{% load static %}
+
+
+{% block content %}
+
+
 <html class="no-js" lang="zxx">
     <head>
         <!-- Meta Tags -->
@@ -1013,6 +1019,13 @@
 			<!--/ End Copyright -->
 		</footer>
 		<!--/ End Footer Area -->
+
+		{% endblock content %}
+
+		{% block extrafooter %}
+		
+	  
+		 
 		
 		<!-- jquery Min JS -->
         <script src="js/jquery.min.js"></script>
@@ -1054,5 +1067,5 @@
 		<script src="js/bootstrap.min.js"></script>
 		<!-- Main JS -->
 		<script src="js/main.js"></script>
-    </body>
-</html>
+    
+   {% endblock extrafooter %}
