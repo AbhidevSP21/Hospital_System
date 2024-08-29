@@ -1,3 +1,5 @@
+{% load static %}
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -6,34 +8,34 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="{% static 'css\style.css' %}" rel="stylesheet">
 		<!-- Favicon -->
-        <link rel="icon" href="img/favicon.png">
+        <link rel="icon" href="{% static 'img/favicon.png' %}">
 		
 		<!-- Google Fonts -->
 		<link href="https://fonts.googleapis.com/css?family=Poppins:200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap" rel="stylesheet">
 
 		<!-- Bootstrap CSS -->
-		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
 		<!-- Nice Select CSS -->
-		<link rel="stylesheet" href="css/nice-select.css">
+		<link rel="stylesheet" href="{% static 'css/nice-select.css' %}">
 		<!-- Font Awesome CSS -->
-        <link rel="stylesheet" href="css/font-awesome.min.css">
+        <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
 		<!-- icofont CSS -->
-        <link rel="stylesheet" href="css/icofont.css">
+        <link rel="stylesheet" href="{% static 'css/icofont.css' %}">
 		<!-- Slicknav -->
-		<link rel="stylesheet" href="css/slicknav.min.css">
+		<link rel="stylesheet" href="{% static 'css/slicknav.min.css' %}">
 		<!-- Owl Carousel CSS -->
-        <link rel="stylesheet" href="css/owl-carousel.css">
+        <link rel="stylesheet" href="{% static 'css/owl-carousel.css' %}">
 		<!-- Datepicker CSS -->
-		<link rel="stylesheet" href="css/datepicker.css">
+		<link rel="stylesheet" href="{% static 'css/datepicker.css' %}">
 		<!-- Animate CSS -->
-        <link rel="stylesheet" href="css/animate.min.css">
+        <link rel="stylesheet" href="{% static 'css/animate.min.css' %}">
 		<!-- Magnific Popup CSS -->
-        <link rel="stylesheet" href="css/magnific-popup.css">
+        <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
 		
 		<!-- Medipro CSS -->
-        <link rel="stylesheet" href="css/normalize.css">
-        <link rel="stylesheet" href="style.css">
-        <link rel="stylesheet" href="css/responsive.css">
+        <link rel="stylesheet" href="{% static 'css/normalize.css' %}">
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+        <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
         
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
         {% block styles %}
@@ -50,7 +52,7 @@
 							<div class="col-lg-3 col-md-3 col-12">
 								<!-- Start Logo -->
 								<div class="logo">
-									<a href="index.html"><img src="img/logo.png" alt="#"></a>
+									<a href="{% url 'index' %}"><img src="{% static 'img/logo.png' %}" alt="#"></a>
 								</div>
 								<!-- End Logo -->
 								<!-- Mobile Nav -->
@@ -62,22 +64,20 @@
 								<div class="main-menu">
 									<nav class="navigation">
 										<ul class="nav menu">
-											<li class="active"><a href="#">Home <i class="icofont-rounded-down"></i></a>
-												<ul class="dropdown">
-													<li><a href="index.html">Home Page 1</a></li>
-												</ul>
+											<li><a href="{% url 'index' %}">Home</a>
 											</li>
-											<li><a href="#">Doctos </a></li>
-											<li><a href="#">Services </a></li>
-											<li><a href="#">Pages <i class="icofont-rounded-down"></i></a>
+											<li><a href="#">Doctors </a></li>
+											<li><a href="#">Services <i class="icofont-rounded-down"></i></a>
 												<ul class="dropdown">
-													<li><a href="404.html">404 Error</a></li>
+													<li><a href="404.html">Book Appointment</a></li>
+													<li><a href="404.html">Predict Desease</a></li>
 												</ul>
+
+										
 											</li>
-											<li><a href="#">Blogs <i class="icofont-rounded-down"></i></a>
-												<ul class="dropdown">
-													<li><a href="blog-single.html">Blog Details</a></li>
-												</ul>
+											<li><a href="#">Reviews </a></li>
+											
+											<li><a href="#">Sign In</i></a>
 											</li>
 											<li><a href="contact.html">Contact Us</a></li>
 										</ul>
@@ -85,11 +85,7 @@
 								</div>
 								<!--/ End Main Menu -->
 							</div>
-							<div class="col-lg-2 col-12">
-								<div class="get-quote">
-									<a href="appointment.html" class="btn">Book Appointment</a>
-								</div>
-							</div>
+							
 						</div>
 					</div>
 				</div>
@@ -100,6 +96,47 @@
 		{% block content %}
 		{% endblock content %}
 	{% block extrafooter %}
+	
+		<!-- jquery Min JS -->
+        <script src="{% static 'js/jquery.min.js' %}"></script>
+		<!-- jquery Migrate JS -->
+		<script src="{% static 'js/jquery-migrate-3.0.0.js' %}"></script>
+		<!-- jquery Ui JS -->
+		<script src="{% static 'js/jquery-ui.min.js' %}"></script>
+		<!-- Easing JS -->
+        <script src="{% static 'js/easing.js' %}"></script>
+		<!-- Color JS -->
+		<script src="{% static 'js/colors.js' %}"></script>
+		<!-- Popper JS -->
+		<script src="{% static 'js/popper.min.js' %}"></script>
+		<!-- Bootstrap Datepicker JS -->
+		<script src="{% static 'js/bootstrap-datepicker.js' %}"></script>
+		<!-- Jquery Nav JS -->
+        <script src="{% static 'js/jquery.nav.js' %}"></script>
+		<!-- Slicknav JS -->
+		<script src="{% static 'js/slicknav.min.js' %}"></script>
+		<!-- ScrollUp JS -->
+        <script src="{% static 'js/jquery.scrollUp.min.js '%}"></script>
+		<!-- Niceselect JS -->
+		<script src="{% static 'js/niceselect.js '%}"></script>
+		<!-- Tilt Jquery JS -->
+		<script src="{% static 'js/tilt.jquery.min.js' %}"></script>
+		<!-- Owl Carousel JS -->
+        <script src="{% static 'js/owl-carousel.js' %}"></script>
+		<!-- counterup JS -->
+		<script src="{% static 'js/jquery.counterup.min.js' %}"></script>
+		<!-- Steller JS -->
+		<script src="{% static 'js/steller.js' %}"></script>
+		<!-- Wow JS -->
+		<script src="{% static 'js/wow.min.js' %}"></script>
+		<!-- Magnific Popup JS -->
+		<script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
+		<!-- Counter Up CDN JS -->
+		<script src="http://cdnjs.cloudflare.com/ajax/libs/waypoints/2.0.3/waypoints.min.js"></script>
+		<!-- Bootstrap JS -->
+		<script src="{% static 'js/bootstrap.min.js' %}"></script>
+		<!-- Main JS -->
+		<script src="{% static 'js/main.js' %}"></script>
 
     {% endblock extrafooter %}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
