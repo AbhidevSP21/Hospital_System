@@ -757,6 +757,7 @@ a:hover, a:active {
 	display: block;
 	float: left;
 	width: 100%;
+	text-decoration: none;
 }
 
 .main-navigation ul {
@@ -773,6 +774,7 @@ a:hover, a:active {
 	top: 100%;
 	left: -999em;
 	z-index: 99999;
+	text-decoration: none;
 }
 
 .main-navigation ul ul ul {
