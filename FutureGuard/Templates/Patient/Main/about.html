@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Future Guard</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .banner-image {
+            width: 100%;
+            height: auto;
+            max-height: 400px; /* Adjust the height as needed */
+            object-fit: cover; /* Ensure the image covers the container without stretching */
+        }
+
+        .container {
+            max-width: 100%;
+        }
+        
+        .social-buttons a {
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container mt-5">
+        <!-- Introductory Image -->
+        <div class="row mb-5">
+            <div class="col-12">
+                <img src="https://via.placeholder.com/1200x400" alt="Future Guard" class="banner-image">
+            </div>
+        </div>
+
+        <h1 class="text-center mb-4">About Us</h1>
+        
+        <section id="about">
+            <h2 class="mb-3">About Us</h2>
+            <p>Welcome to FutureGuard: Intelligent Hospital System, a cutting-edge healthcare platform designed to transform the way medical services are delivered. In an era where healthcare systems are burdened with high costs, long wait times, and the challenge of managing complex patient data, FutureGuard offers a revolutionary solution.
+
+                Our mission is to enhance patient care by integrating advanced machine learning technologies with seamless healthcare management. FutureGuard is not just another healthcare platform—it’s a comprehensive system that combines disease prediction, personalized healthcare recommendations, appointment scheduling, and secure electronic medical records management, all in one place.
+                
+                At FutureGuard, we believe in proactive healthcare. Our platform leverages machine learning to accurately predict diseases based on individual symptoms and medical history, offering personalized prevention strategies and medication recommendations. Unlike other platforms that cater to single diseases, FutureGuard provides a unified solution to predict and manage multiple conditions, ensuring that our users receive the most holistic and effective care possible.
+                
+                Our platform is designed for a diverse user base, including administrators, physicians, and patients. Patients can easily locate and schedule appointments with nearby doctors, reducing wait times and improving accessibility. Automated reminders ensure regular check-ins, contributing to better health outcomes. Administrators benefit from our powerful dashboard, which provides insightful data visualization and analysis tools to support informed decision-making and efficient hospital management.
+                
+                Security and privacy are at the core of FutureGuard. Our secure database ensures that electronic medical records are stored safely, providing patients and healthcare providers with easy and secure access to critical information.
+                
+                We are dedicated to pushing the boundaries of traditional healthcare systems and creating a more efficient, patient-centric future. Join us on this journey to revolutionize healthcare delivery with FutureGuard.</p>
+        </section>
+
+        <section id="services" class="mt-5">
+            <h2 class="mb-3">Our Services</h2>
+            <ul class="list-group">
+                <li class="list-group-item"><strong>Disease Prediction:</strong> Advanced AI algorithms to predict potential health risks.</li>
+                <li class="list-group-item"><strong>Appointment Scheduling:</strong> Easy booking with healthcare providers.</li>
+                <li class="list-group-item"><strong>Doctor Availability:</strong> Real-time updates on doctor availability.</li>
+                <li class="list-group-item"><strong>Nearby Hospitals:</strong> Find the nearest hospitals with location-based search.</li>
+                <li class="list-group-item"><strong>Personalized Recommendations:</strong> Tailored healthcare advice based on medical history.</li>
+            </ul>
+        </section>
+
+        <section id="contact" class="mt-5">
+            <h2 class="mb-3">Contact Details</h2>
+            <p>We are here to support you on your healthcare journey. Feel free to reach out to us:</p>
+            <p><strong>Email:</strong> support@futureguard.com</p>
+            <p><strong>Phone:</strong> +1-234-567-8901</p>
+            <p><strong>Address:</strong> 123 Health Street, Wellness City, HC 45678</p>
+        </section>
+
+        <section id="social-media" class="mt-5">
+            <h2 class="mb-3">Follow Us</h2>
+            <div class="social-buttons">
+                <a href="https://facebook.com/futureguard" target="_blank" class="btn btn-primary">Facebook</a>
+                <a href="https://twitter.com/futureguard" target="_blank" class="btn btn-info">Twitter</a>
+                <a href="https://linkedin.com/company/futureguard" target="_blank" class="btn btn-secondary">LinkedIn</a>
+            </div>
+        </section>
+
+        <section id="faq" class="mt-5 mb-5">
+            <h2 class="mb-3">Frequently Asked Questions</h2>
+            <div class="accordion" id="faqAccordion">
+                <div class="card">
+                    <div class="card-header" id="headingOne">
+                        <h5 class="mb-0">
+                            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                How does the disease prediction feature work?
+                            </button>
+                        </h5>
+                    </div>
+                    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#faqAccordion">
+                        <div class="card-body">
+                            Our AI algorithms analyze user input and historical health data to identify potential health risks, providing predictions based on recognized patterns.
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header" id="headingTwo">
+                        <h5 class="mb-0">
+                            <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                How do I schedule an appointment?
+                            </button>
+                        </h5>
+                    </div>
+                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#faqAccordion">
+                        <div class="card-body">
+                            Simply visit our appointment page, select your preferred doctor and time, and confirm your booking.
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header" id="headingThree">
+                        <h5 class="mb-0">
+                            <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                Is my personal data secure?
+                            </button>
+                        </h5>
+                    </div>
+                    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#faqAccordion">
+                        <div class="card-body">
+                            Absolutely. We use the latest encryption technologies and adhere to strict privacy standards to ensure your data is protected.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
