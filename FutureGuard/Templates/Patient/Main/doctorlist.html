@@ -1,116 +1,151 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Doctor Directory</title>
     <!-- Bootstrap CSS -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
     <style>
-        .card {
-            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-        }
-        .card:hover {
-            transform: translateY(-10px) scale(1.05);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-            background-color: #78a6eb;
-            color: white;
-        }
-
-        .card img {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin-bottom: 15px;
-        }
-
-        .card-title {
-            color: #007bff;
-        }
-
-        .card-body {
-            text-align: center;
-        }
+      .card {
+        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+      }
+      .card:hover {
+        transform: translateY(-10px) scale(1.05);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        background-color: #78a6eb;
+        color: white;
+      }
+      
+      .card img {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-bottom: 15px;
+      }
+      
+      .card-title {
+        color: #007bff;
+      }
+      
+      .card-body {
+        text-align: center;
+      }
     </style>
-</head>
-<body>
-
+  </head>
+  <body>
     <div class="container mt-5">
-        <h1 class="text-center mb-4">Doctor Directory</h1>
-        <div class="row">
-            <div class="col-md-4 mb-4">
-                <div class="card h-100">
-                    <img src="https://via.placeholder.com/100" class="card-img-top mx-auto mt-4" alt="Doctor Photo">
-                    <div class="card-body">
-                        <h5 class="card-title">Dr. John Doe</h5>
-                        <p class="card-text"><strong>Specialization:</strong> Cardiology</p>
-                        <p class="card-text"><strong>Experience:</strong> 15 years</p>
-                        <p class="card-text"><strong>Contact:</strong> johndoe@example.com</p>
-                    </div>
-                </div>
+      <h1 class="text-center mb-4">Doctor Directory</h1>
+      <div class="row">
+        <div class="col-md-4 mb-4">
+          <div class="card h-100">
+            <img src="https://via.placeholder.com/100" class="card-img-top mx-auto mt-4" alt="Doctor Photo" />
+            <div class="card-body">
+              <h5 class="card-title">Dr. John Doe</h5>
+              <p class="card-text">
+                <strong>Specialization:</strong> Cardiology
+              </p>
+              <p class="card-text">
+                <strong>Experience:</strong> 15 years
+              </p>
+              <p class="card-text">
+                <strong>Contact:</strong> johndoe@example.com
+              </p>
             </div>
-            <div class="col-md-4 mb-4">
-                <div class="card h-100">
-                    <img src="https://via.placeholder.com/100" class="card-img-top mx-auto mt-4" alt="Doctor Photo">
-                    <div class="card-body">
-                        <h5 class="card-title">Dr. Jane Smith</h5>
-                        <p class="card-text"><strong>Specialization:</strong> Neurology</p>
-                        <p class="card-text"><strong>Experience:</strong> 10 years</p>
-                        <p class="card-text"><strong>Contact:</strong> janesmith@example.com</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 mb-4">
-                <div class="card h-100">
-                    <img src="https://via.placeholder.com/100" class="card-img-top mx-auto mt-4" alt="Doctor Photo">
-                    <div class="card-body">
-                        <h5 class="card-title">Dr. Emily Johnson</h5>
-                        <p class="card-text"><strong>Specialization:</strong> Pediatrics</p>
-                        <p class="card-text"><strong>Experience:</strong> 8 years</p>
-                        <p class="card-text"><strong>Contact:</strong> emilyjohnson@example.com</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 mb-4">
-                <div class="card h-100">
-                    <img src="https://via.placeholder.com/100" class="card-img-top mx-auto mt-4" alt="Doctor Photo">
-                    <div class="card-body">
-                        <h5 class="card-title">Dr. Michael Brown</h5>
-                        <p class="card-text"><strong>Specialization:</strong> Orthopedics</p>
-                        <p class="card-text"><strong>Experience:</strong> 12 years</p>
-                        <p class="card-text"><strong>Contact:</strong> michaelbrown@example.com</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 mb-4">
-                <div class="card h-100">
-                    <img src="https://via.placeholder.com/100" class="card-img-top mx-auto mt-4" alt="Doctor Photo">
-                    <div class="card-body">
-                        <h5 class="card-title">Dr. Sarah Wilson</h5>
-                        <p class="card-text"><strong>Specialization:</strong> Dermatology</p>
-                        <p class="card-text"><strong>Experience:</strong> 9 years</p>
-                        <p class="card-text"><strong>Contact:</strong> sarahwilson@example.com</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 mb-4">
-                <div class="card h-100">
-                    <img src="https://via.placeholder.com/100" class="card-img-top mx-auto mt-4" alt="Doctor Photo">
-                    <div class="card-body">
-                        <h5 class="card-title">Dr. David Lee</h5>
-                        <p class="card-text"><strong>Specialization:</strong> Gastroenterology</p>
-                        <p class="card-text"><strong>Experience:</strong> 11 years</p>
-                        <p class="card-text"><strong>Contact:</strong> davidlee@example.com</p>
-                    </div>
-                </div>
-            </div>
+          </div>
         </div>
+        <div class="col-md-4 mb-4">
+          <div class="card h-100">
+            <img src="https://via.placeholder.com/100" class="card-img-top mx-auto mt-4" alt="Doctor Photo" />
+            <div class="card-body">
+              <h5 class="card-title">Dr. Jane Smith</h5>
+              <p class="card-text">
+                <strong>Specialization:</strong> Neurology
+              </p>
+              <p class="card-text">
+                <strong>Experience:</strong> 10 years
+              </p>
+              <p class="card-text">
+                <strong>Contact:</strong> janesmith@example.com
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-4">
+          <div class="card h-100">
+            <img src="https://via.placeholder.com/100" class="card-img-top mx-auto mt-4" alt="Doctor Photo" />
+            <div class="card-body">
+              <h5 class="card-title">Dr. Emily Johnson</h5>
+              <p class="card-text">
+                <strong>Specialization:</strong> Pediatrics
+              </p>
+              <p class="card-text">
+                <strong>Experience:</strong> 8 years
+              </p>
+              <p class="card-text">
+                <strong>Contact:</strong> emilyjohnson@example.com
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-4">
+          <div class="card h-100">
+            <img src="https://via.placeholder.com/100" class="card-img-top mx-auto mt-4" alt="Doctor Photo" />
+            <div class="card-body">
+              <h5 class="card-title">Dr. Michael Brown</h5>
+              <p class="card-text">
+                <strong>Specialization:</strong> Orthopedics
+              </p>
+              <p class="card-text">
+                <strong>Experience:</strong> 12 years
+              </p>
+              <p class="card-text">
+                <strong>Contact:</strong> michaelbrown@example.com
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-4">
+          <div class="card h-100">
+            <img src="https://via.placeholder.com/100" class="card-img-top mx-auto mt-4" alt="Doctor Photo" />
+            <div class="card-body">
+              <h5 class="card-title">Dr. Sarah Wilson</h5>
+              <p class="card-text">
+                <strong>Specialization:</strong> Dermatology
+              </p>
+              <p class="card-text">
+                <strong>Experience:</strong> 9 years
+              </p>
+              <p class="card-text">
+                <strong>Contact:</strong> sarahwilson@example.com
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-4">
+          <div class="card h-100">
+            <img src="https://via.placeholder.com/100" class="card-img-top mx-auto mt-4" alt="Doctor Photo" />
+            <div class="card-body">
+              <h5 class="card-title">Dr. David Lee</h5>
+              <p class="card-text">
+                <strong>Specialization:</strong> Gastroenterology
+              </p>
+              <p class="card-text">
+                <strong>Experience:</strong> 11 years
+              </p>
+              <p class="card-text">
+                <strong>Contact:</strong> davidlee@example.com
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- Bootstrap JS, Popper.js, and jQuery -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</body>
+  </body>
 </html>
