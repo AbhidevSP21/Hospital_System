@@ -30,6 +30,11 @@ body {
 img{
 	max-width:100%;
 }
+
+.logo{
+	max-width:100%;
+	height: 85px;
+}
 article,
 aside,
 details,
@@ -352,6 +357,7 @@ Preloader Area CSS
 
 .preloader.preloader-deactivate {
   visibility: hidden;
+  
 }
 
 .preloader.preloader-deactivate::after, .preloader.preloader-deactivate::before {

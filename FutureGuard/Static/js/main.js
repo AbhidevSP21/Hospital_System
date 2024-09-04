@@ -323,9 +323,38 @@ Version:	1.1
 	/*====================
 		Preloader JS
 	======================*/
+
 	$(window).on('load', function() {
+		console.log("Window loaded");
 		$('.preloader').addClass('preloader-deactivate');
 	});
+	
+	setTimeout(function() {
+		console.log("Fallback timeout triggered");
+		$('.preloader').addClass('preloader-deactivate');
+	}, 5000);
+	
+	// $(window).on('load', function() {
+	// 	$('.preloader').addClass('preloader-deactivate');
+	// });
+
+	// $(window).on('load', function() {
+	// 	// Deactivate preloader once the page has fully loaded
+	// 	$('.preloader').addClass('preloader-deactivate');
+	// });
+	
+	// // Fallback: Force deactivate preloader after 5 seconds (adjust as needed)
+	// setTimeout(function() {
+	// 	$('.preloader').addClass('preloader-deactivate');
+	// }, 5000);
+	
+	// window.onload = function() {
+	// 	const preloader = document.querySelector('.preloader');
+	// 	setTimeout(() => {
+	// 		preloader.style.display = 'none';
+	// 	}, 5000); // Adjust the time (5000ms = 5s) based on your needs
+	// };
+	
 	
 	
 })(jQuery);

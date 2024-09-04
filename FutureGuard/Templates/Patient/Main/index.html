@@ -8,7 +8,7 @@
 
 	
 		<!-- Preloader -->
-        <!-- <div class="preloader">
+        <div class="preloader">
             <div class="loader">
                 <div class="loader-outter"></div>
                 <div class="loader-inner"></div>
@@ -20,7 +20,7 @@
                     </svg>
                 </div>
             </div>
-        </div> -->
+        </div>
         <!-- End Preloader -->
 		
 	
@@ -29,6 +29,7 @@
 		<section class="slider">
 			<div class="hero-slider">
 				<!-- Start Single Slider -->
+				 
 				<div class="single-slider" style="background-image:url({% static 'img/slider2.jpg' %})">
 					<div class="container">
 						<div class="row">
@@ -38,7 +39,7 @@
 									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sed nisl pellentesque, faucibus libero eu, gravida quam. </p>
 									<div class="button">
 										<a href="#" class="btn">Get Appointment</a>
-										<a href="#" class="btn primary">Sign In</a>
+										<a href="{% url 'login' %}" class="btn primary">Sign In</a>
 									</div>
 								</div>
 							</div>
@@ -52,8 +53,8 @@
 						<div class="row">
 							<div class="col-lg-7">
 								<div class="text">
-									<h1>We Provide <span>Medical</span> Services That You Can <span>Trust!</span></h1>
-									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sed nisl pellentesque, faucibus libero eu, gravida quam. </p>
+									<h1>Predict Your<span> Health </span>with <span>Confidence!</span></h1>
+									<p>Get accurate disease predictions based on your symptoms and medical history. Our intelligent system offers personalized prevention techniques and medication recommendations to keep you healthy. </p>
 									<div class="button">
 										<a href="#" class="btn">Predict Disease</a>
 										<a href="#" class="btn primary">About Us</a>
@@ -877,13 +878,5 @@
 			<!--/ End Copyright -->
 		</footer>
 		<!--/ End Footer Area -->
-
-		{% endblock content %}
-
-		{% block extrafooter %}
-		
-	  
-		 
-		
     
-   {% endblock extrafooter %}
+   {% endblock content %}
