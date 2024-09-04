@@ -1,14 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Feedback Form</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="styles.css">
-    
-</head>
-<body>
+{% extends 'Patient/Base.html' %} 
+{% load static %}
+
+
+{% block content %}
+
+<!-- Preloader -->
+<div class="preloader">
+    <div class="loader">
+        <div class="loader-outter"></div>
+        <div class="loader-inner"></div>
+
+        <div class="indicator"> 
+            <svg width="16px" height="12px">
+                <polyline id="back" points="1 6 4 6 6 11 10 1 12 6 15 6"></polyline>
+                <polyline id="front" points="1 6 4 6 6 11 10 1 12 6 15 6"></polyline>
+            </svg>
+        </div>
+    </div>
+</div>
+<!-- End Preloader -->
     <div class="container mt-5">
         <h1 class="text-center mb-4">Feedback Form</h1>
         <div class="row justify-content-center">
@@ -46,12 +56,17 @@
             </div>
         </div>
     </div>
+    {% endblock content %}
+
+		{% block extrafooter %}
+		
+	  
+		 
+		
+    
+   {% endblock extrafooter %}
 
 
 
-    <script src="feedback.js"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</body>
-</html>
+
+

@@ -309,7 +309,7 @@ body{
 }
 .header .logo {
 	float: left;
-	margin-top: 18px;
+	margin-top: 15px;
 }
 .header .navbar {
 	background: none;
@@ -591,6 +591,7 @@ body{
 /*===========================
 	Start Hero Area CSS
 =============================*/
+
 .slider .single-slider {
 	height: 600px;
 	background-size: cover;
