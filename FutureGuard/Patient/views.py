@@ -14,4 +14,6 @@ def feedback(request) :
     return render(request, "Patient/Main/feedback.html",context={})
 def contact(request) :
     return render(request, "Patient\Main\contact.html",context={})
+def about(request) :
+    return render(request, "Patient/Main/about.html",context={})
 
