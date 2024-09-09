@@ -1,0 +1,118 @@
+{% extends 'Patient/Base.html' %} 
+{% load static %}
+
+
+{% block content %}
+
+<head>
+<style>
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);
+    color: #333;
+}
+
+.container {
+    width: 80%;
+    margin: auto;
+    background: white;
+    padding: 20px;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    background: #ffffff; /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #e3ffe7, #d9e7ff); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #e3ffe7, #d9e7ff); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+header h1 {
+    color: #ff6347;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+nav ul {
+    list-style-type: none;
+    text-align: center;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 10px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    background-color: #e3f2fd;
+    padding: 10px 20px;
+    border-radius: 20px;
+    transition: background-color 0.3s;
+}
+
+nav ul li a:hover {
+    background-color: #b3e5fc;
+}
+
+.prediction-form h2, .result h2 {
+    color: #ff6347;
+}
+
+#symptomsInput {
+    width: 300px;
+    padding: 10px;
+    border: 2px solid #b3e5fc;
+    border-radius: 4px;
+}
+
+button {
+    background-color: #ff6347;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #ff8267;
+}
+
+.result {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #f1f8e9;
+    border-left: 5px solid #ff6347;
+    border-radius: 4px;
+}
+
+        
+</style>
+</head>
+    <div class="container">
+        <header>
+            <h1>Disease Prediction using Machine Learning</h1>
+        </header>
+        <nav>
+            <ul>
+                <li><a href="#">Diabetes Prediction</a></li>
+                <li><a href="#">Heart Disease Prediction</a></li>
+                <li><a href="#">Parkinson Prediction</a></li>
+                <!-- Add more links as needed -->
+            </ul>
+        </nav>
+        <main>
+            <section class="prediction-form">
+                <h2>What are your symptoms?</h2>
+                <input type="text" placeholder="Enter symptoms" id="symptomsInput">
+                <button onclick="predictDisease()">Predict</button>
+            </section>
+           
+        </main>
+    </div>
+    {% endblock content %}
+
