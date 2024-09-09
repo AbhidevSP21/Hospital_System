@@ -18,5 +18,9 @@ def about(request) :
     return render(request, "Patient/Main/about.html",context={})
 def portal(request) :
     return render(request, "Patient\Main\Portal.html",context={})
+def appointment(request) :
+    return render(request, "Patient/Main/appointment.html",context={})
+def prediction(request) :
+    return render(request, "Patient\Main\Prediction.html",context={})
 
 
