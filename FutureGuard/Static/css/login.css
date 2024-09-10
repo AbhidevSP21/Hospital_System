@@ -10,7 +10,11 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+<<<<<<< HEAD
+  background: #0d6efd;
+=======
   background: #0D6EFD;
+>>>>>>> a904f228efef31940de692e127e09bfc1aac2898
   padding: 30px;
 }
 .container {
