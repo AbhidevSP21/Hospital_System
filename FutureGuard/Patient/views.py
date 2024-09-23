@@ -23,6 +23,10 @@ def about(request) :
     return render(request, "Patient/Main/about.html",context={})
 def userprofile(request) :
     return render(request, "Patient/Main/userprofile.html",context={})
+def appointment(request) :
+    return render(request, "Patient/Main/appointment.html",context={})
+def prediction(request) :
+    return render(request, "Patient\Main\Prediction.html",context={})
 
 def patient_register(request):
     if request.method == 'POST':
