@@ -27,6 +27,8 @@ def appointment(request) :
     return render(request, "Patient/Main/appointment.html",context={})
 def prediction(request) :
     return render(request, "Patient\Main\Prediction.html",context={})
+def BMI(request) :
+    return render(request, "Patient\Main\BMI.html",context={})
 
 def patient_register(request):
     if request.method == 'POST':
