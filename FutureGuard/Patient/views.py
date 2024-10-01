@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.models import User
-from .models import PatientProfile
+from .models import PatientProfile, feedback
 from django.contrib.auth.hashers import make_password
 
 
@@ -10,19 +10,35 @@ from django.contrib.auth.hashers import make_password
 def index(request):
     return render(request,"Patient\Main\index.html",context={})
 
-def login_access(request) :
+def login_access(request):
     return render(request, "Patient\Main\login.html",context={})
 
 def doctorlist(request) :
     return render(request, "Patient\Main\doctorlist.html",context={})
-def feedback(request) :
+
+def Patient_feedback(request) :
+    if request.method=="POST":
+        user_id=request.user.id
+        user=User.objects.get(id=user_id)
+        name=request.POST['name']
+        email=request.POST['email']
+        feedback_txt=request.POST['feedback']
+        rating=request.POST['rating']
+        Feedback=feedback.objects.create(user=user,email=email,name=name,feedback=feedback_txt,rating=rating)
+        Feedback.save()
+        return redirect('index')
     return render(request, "Patient/Main/feedback.html",context={})
+
 def contact(request) :
     return render(request, "Patient\Main\contact.html",context={})
 def about(request) :
     return render(request, "Patient/Main/about.html",context={})
 def userprofile(request) :
     return render(request, "Patient/Main/userprofile.html",context={})
+def appointment(request) :
+    return render(request, "Patient/Main/appointment.html",context={})
+def prediction(request) :
+    return render(request, "Patient/Main/Prediction.html",context={})
 
 def patient_register(request):
     if request.method == 'POST':
