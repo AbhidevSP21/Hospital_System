@@ -1,12 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BMI Calculator</title>
-    <link rel="stylesheet" href="BMI.css">
-</head>
-<body>
+{% extends 'Patient/Base.html' %} 
+{% load static %}
+
+
+{% block content %}
     <div class="container">
         <h1>BMI Calculator</h1>
         <form id="bmiForm">
@@ -18,6 +14,4 @@
         </form>
         <div id="result"></div>
     </div>
-    <script src="BMI.js"></script>
-</body>
-</html>
+    
