@@ -20,3 +20,10 @@ class PatientProfile(models.Model):
         ('patient','Patient'),
         ('doctor','Doctor'),
     ),default='Patient')
+
+class feedback(models.Model):
+    user=models.ForeignKey(User,on_delete=models.CASCADE,default=0)
+    name=models.CharField(max_length=100)
+    email=models.CharField(max_length=100)
+    rating=models.IntegerField(null=False)
+    feedback=models.CharField(max_length=1000,null=True)
