@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Future Guard - Admin - Settings</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa;
+        }
+
+        .main-content {
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <h3 class="mb-4">Settings</h3>
+
+        <!-- General Settings -->
+        <h5>General Settings</h5>
+        <form>
+            <div class="mb-3">
+                <label for="siteTitle" class="form-label">Site Title</label>
+                <input type="text" class="form-control" id="siteTitle" placeholder="Enter site title">
+            </div>
+            <div class="mb-3">
+                <label for="logo" class="form-label">Upload Logo</label>
+                <input type="file" class="form-control" id="logo">
+            </div>
+            <div class="mb-3">
+                <label for="favicon" class="form-label">Upload Favicon</label>
+                <input type="file" class="form-control" id="favicon">
+            </div>
+            <button type="submit" class="btn btn-primary">Save Changes</button>
+        </form>
+
+        <!-- User Management -->
+        <h5 class="mt-5">User Management</h5>
+        <p>Manage admin users and roles here.</p>
+        <button class="btn btn-secondary">Manage Admin Users</button>
+
+        <!-- Notification Settings -->
+        <h5 class="mt-5">Notification Settings</h5>
+        <form>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="emailNotifications" checked>
+                <label class="form-check-label" for="emailNotifications">Enable Email Notifications</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="smsNotifications">
+                <label class="form-check-label" for="smsNotifications">Enable SMS Notifications</label>
+            </div>
+            <button type="submit" class="btn btn-primary mt-2">Save Notification Settings</button>
+        </form>
+
+        <!-- Security Settings -->
+        <h5 class="mt-5">Security Settings</h5>
+        <p>Manage security options like password policies and two-factor authentication.</p>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
