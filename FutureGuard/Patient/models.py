@@ -15,7 +15,6 @@ class PatientProfile(models.Model):
     name = models.CharField(max_length=100)
     email = models.CharField(max_length=100)
     phone_no = models.CharField(max_length=15)
-    password = models.CharField(max_length=20)
     role=models.CharField(max_length=20,choices=(
         ('patient','Patient'),
         ('doctor','Doctor'),

@@ -8,7 +8,8 @@ from django.contrib.auth.hashers import make_password
 
 
 def index(request):
-    return render(request,"Patient\Main\index.html",context={})
+    review = feedback.objects.all()
+    return render(request,"Patient\Main\index.html",{'review':review})
 
 def login_access(request):
     return render(request, "Patient\Main\login.html",context={})
@@ -27,14 +28,17 @@ def Patient_feedback(request) :
         Feedback=feedback.objects.create(user=user,email=email,name=name,feedback=feedback_txt,rating=rating)
         Feedback.save()
         return redirect('index')
-    return render(request, "Patient/Main/feedback.html",context={})
+    data = PatientProfile.objects.filter(user_id = request.user)
+    return render(request, "Patient/Main/feedback.html",{'data':data})
 
 def contact(request) :
     return render(request, "Patient\Main\contact.html",context={})
 def about(request) :
     return render(request, "Patient/Main/about.html",context={})
+
 def userprofile(request) :
-    return render(request, "Patient/Main/userprofile.html",context={})
+    data = PatientProfile.objects.filter(user_id = request.user)
+    return render(request, "Patient/Main/userprofile.html",{'data':data})
 def appointment(request) :
     return render(request, "Patient/Main/appointment.html",context={})
 def prediction(request) :
@@ -44,13 +48,17 @@ def patient_register(request):
     if request.method == 'POST':
         name=request.POST['name']
         email=request.POST['email']
-        phone_no=request.POST['phone_no']
-        password=request.POST['password']
-        role='Patient'
-        user=User.objects.create_user(username=email)
-        user.set_password(password)
-        user.save()
-        PatientProfile.objects.create(user=user,email=email,name=name,phone_no=phone_no,role=role)
+        if User.objects.filter(username=email).exists():
+            msg = 'username already exists!'
+            return render(request, 'Patient/Main/login.html',{'msg':msg})
+        else:
+            phone_no=request.POST['phone_no']
+            password=request.POST['password']
+            role='Patient'
+            user=User.objects.create_user(username=email,email=email)
+            user.set_password(password)
+            user.save()
+            PatientProfile.objects.create(user=user,email=email,name=name,phone_no=phone_no,role=role)
 
         login(request,user)
 
@@ -61,7 +69,6 @@ def user_login(request):
     if request.method == 'POST':
         username = request.POST.get('email')
         password = request.POST.get('password')
-        
         user = authenticate(request,username=username,password=password)
         if user is not None and user.is_active:
             # Redirect based on user role

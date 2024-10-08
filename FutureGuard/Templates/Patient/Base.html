@@ -75,8 +75,8 @@
 								<div class="main-menu">
 									<nav class="navigation">
 										<ul class="nav menu">
-											<li><a href="{% url 'index' %}">Home</a>
-											</li>
+											{% if request.user.is_authenticated %}
+											<li><a href="{% url 'userprofile' %}">Profile</a></li>
 											<li><a href="{% url 'doctorlist' %}">Doctors </a></li>
 											<li><a href="#">Services <i class="icofont-rounded-down"></i></a>
 												<ul class="dropdown">
@@ -87,15 +87,23 @@
 										
 											</li>
 											<li><a href="{% url 'feedback' %}">Reviews </a></li>
-											
-											<li>
-												{% if request.user.is_authenticated %}
-												<a href="{% url 'logout' %}">Sign Out</i></a>
-												{% else %}
-												<a href="{% url 'login' %}">Sign In</i></a>
-												{% endif %}
-											</li>
+											<li><a href="{% url 'logout' %}">Sign Out</i></a></li>
 											<li><a href="{% url 'contact' %}">Contact Us</a></li>
+											{% else %}
+											<li><a href="{% url 'index' %}">Home</a></li>
+											<li><a href="{% url 'doctorlist' %}">Doctors </a></li>
+											<li><a href="#">Services <i class="icofont-rounded-down"></i></a>
+												<ul class="dropdown">
+													<li><a href="{% url 'login' %}">Book Appointment</a></li>
+													<li><a href="{% url 'login' %}">Predict Desease</a></li>
+												</ul>
+
+											<li><a href="{% url 'login' %}">Sign In</i></a></li>
+											<li><a href="{% url 'feedback' %}">Reviews </a></li>
+											<li><a href="{% url 'contact' %}">Contact Us</a></li>
+											
+											{% endif %}
+									
 										</ul>
 									</nav>
 								</div>
