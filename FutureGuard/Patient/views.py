@@ -4,6 +4,9 @@ from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.models import User
 from .models import PatientProfile, feedback
 from django.contrib.auth.hashers import make_password
+import csv
+from django.conf import settings
+import os
 
 
 
@@ -41,24 +44,45 @@ def userprofile(request) :
     return render(request, "Patient/Main/userprofile.html",{'data':data})
 def appointment(request) :
     return render(request, "Patient/Main/appointment.html",context={})
-def prediction(request) :
-    return render(request, "Patient/Main/Prediction.html",context={})
+
+def prediction(request):
+    # Define the path to your CSV file
+    # csv_path = os.path.join(settings.BASE_DIR, 'Data', 'symptoms.csv')
+    # Using the Data directory path in another part of your project
+    csv_path = settings.DATA_DIR / 'symptoms.csv'
+
+    symptoms = []
+
+    # Read symptoms from the CSV file
+    with open(csv_path, 'r') as csvfile:
+        reader = csv.reader(csvfile)
+        for row in reader:
+            symptoms.append(row[0])  # Assuming each symptom is in the first column
+
+    # Handle form submission
+    if request.method == 'POST':
+        selected_symptoms = request.POST.getlist('symptoms')
+        # Process selected_symptoms for prediction
+        # result = predict_disease(selected_symptoms)
+        # Pass result to template or redirect
+
+    return render(request, "Patient/Main/Prediction.html",{'symptoms': symptoms})
 
 def patient_register(request):
     if request.method == 'POST':
-        name=request.POST['name']
+        firstname=request.POST['firstname']
+        lastname=request.POST['lastname']
         email=request.POST['email']
         if User.objects.filter(username=email).exists():
             msg = 'username already exists!'
             return render(request, 'Patient/Main/login.html',{'msg':msg})
         else:
-            phone_no=request.POST['phone_no']
             password=request.POST['password']
             role='Patient'
-            user=User.objects.create_user(username=email,email=email)
+            user=User.objects.create_user(username=email,email=email,first_name=firstname,last_name=lastname)
             user.set_password(password)
             user.save()
-            PatientProfile.objects.create(user=user,email=email,name=name,phone_no=phone_no,role=role)
+            PatientProfile.objects.create(user=user,role=role)
 
         login(request,user)
 

@@ -129,3 +129,5 @@ STATICFILES_DIRS=[
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_REDIRECT_URL = '/index/'  # Or wherever you want the user to go after login
+
+DATA_DIR = BASE_DIR / 'Data'
