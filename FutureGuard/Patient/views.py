@@ -11,13 +11,45 @@ from django.contrib import messages
 
 
 def index(request):
-    return render(request,"Patient\Main\index.html",context={})
+    review = feedback.objects.all()
+    return render(request,"Patient\Main\index.html",{'review':review})
 
 def login_access(request):
     return render(request, "Patient\Main\login.html",context={})
 
 def doctorlist(request) :
     return render(request, "Patient\Main\doctorlist.html",context={})
+def profileupdate(request) :
+    return render(request, "Patient\Main\Profile_Update.html",context={})
+
+def editprofile(request) :
+    if request.method== 'POST':
+        name=request.POST.get('name')
+        email=request.POST.get('email')
+        phone=request.POST.get('phone')
+        dob=request.POST.get('dob')
+        blood_group=request.POST.get('blood_group')
+        emergency_contact=request.POST.get('emergency_contact')
+        profile_picture=request.FILES.get('image')
+        medical_report=request.FILES.get('doc')
+
+        MedicalProfile.objects.create(
+            name=name,
+            email=email,
+            phone=phone,
+            dob=dob,
+            blood_group=blood_group,
+            emergency_contact=emergency_contact,
+            profile_picture=profile_picture,
+            medical_report=medical_report
+
+        )
+    update=MedicalProfile.objects.all()
+    return render(request, "Patient\Main\editprofile.html",{'update':update})
+def viewprofile(request):
+    
+
+    return render(request,"Patient/Main/viewprofile.html", context={})
 
 def Patient_feedback(request) :
     if request.method=="POST":
@@ -30,84 +62,90 @@ def Patient_feedback(request) :
         Feedback=feedback.objects.create(user=user,email=email,name=name,feedback=feedback_txt,rating=rating)
         Feedback.save()
         return redirect('index')
-    return render(request, "Patient/Main/feedback.html",context={})
+    data = PatientProfile.objects.filter(user_id = request.user)
+    return render(request, "Patient/Main/feedback.html",{'data':data})
 
 def booking(request):
-    # Calling 'validWeekday' Function to Loop days you want in the next 21 days:
-    weekdays = validWeekday(22)
+    user = request.user
+    weekdays = validWeekday(22)  # Calling 'validWeekday' Function to Loop days you want in the next 21 days
+    validateWeekdays = isWeekdayValid(weekdays)  # Only show the days that are not full
 
-    # Only show the days that are not full:
-    validateWeekdays = isWeekdayValid(weekdays)
+    times = [
+        "3 PM", "3:30 PM", "4 PM", "4:30 PM", "5 PM", "5:30 PM", "6 PM", "6:30 PM", "7 PM", "7:30 PM"
+    ]
+    today = datetime.now()
+    minDate = today.strftime('%Y-%m-%d')
+    deltatime = today + timedelta(days=21)
+    strdeltatime = deltatime.strftime('%Y-%m-%d')
+    maxDate = strdeltatime
+
+    # Get stored data from django session (if exists):
+    day = request.session.get('day')
+    service = request.session.get('service')
 
     if request.method == 'POST':
-        service = request.POST.get('service')
-        day = request.POST.get('day')
+        # First step: Selecting service and day
+        if not service or not day:
+            service = request.POST.get('service')
+            day = request.POST.get('day')
+            if service is None:
+                messages.success(request, "Please Select A Service!")
+                return redirect('booking')
 
-        if service is None:
-            messages.success(request, "Please Select A Service!")
+            # Store day and service in django session:
+            request.session['day'] = day
+            request.session['service'] = service
+
+            # Redirect to the same view (second step: confirming time)
             return redirect('booking')
 
-        # Store day and service in django session:
-        request.session['day'] = day
-        request.session['service'] = service
-
-        # Logic that was inside bookingSubmit
-        user = request.user
-        times = [
-            "3 PM", "3:30 PM", "4 PM", "4:30 PM", "5 PM", "5:30 PM", 
-            "6 PM", "6:30 PM", "7 PM", "7:30 PM"
-        ]
-        today = datetime.now()
-        minDate = today.strftime('%Y-%m-%d')
-        deltatime = today + timedelta(days=21)
-        maxDate = deltatime.strftime('%Y-%m-%d')
-
-        # Get stored data from session
-        day = request.session.get('day')
-        service = request.session.get('service')
-
-        # Only show the time of the day that has not been selected before:
-        available_hours = checkTime(times, day)
-        selected_time = request.POST.get("time")
-        date = dayToWeekday(day)
-
-        if service:
-            if minDate <= day <= maxDate:
-                if date in ['Monday', 'Wednesday', 'Saturday']:
-                    if Appointment.objects.filter(day=day).count() < 11:
-                        if Appointment.objects.filter(day=day, time=selected_time).count() < 1:
-                            Appointment.objects.get_or_create(
-                                user=user,
-                                service=service,
-                                day=day,
-                                time=selected_time,
-                            )
-                            messages.success(request, "Appointment Saved!")
-                            return redirect('index')
-                        else:
-                            messages.success(request, "The Selected Time Has Been Reserved Before!")
-                    else:
-                        messages.success(request, "The Selected Day Is Full!")
-                else:
-                    messages.success(request, "The Selected Date Is Incorrect!")
-            else:
-                messages.success(request, "The Selected Date Isn't In The Correct Time Period!")
+        # Second step: Selecting time and confirming appointment
         else:
-            messages.success(request, "Please Select A Service!")
+            time = request.POST.get("time")
+            date = dayToWeekday(day)
 
-    return render(request, 'booking.html', {
+            if service:
+                if minDate <= day <= maxDate:
+                    if date in ['Monday', 'Saturday', 'Wednesday']:
+                        if Appointment.objects.filter(day=day).count() < 11:
+                            if Appointment.objects.filter(day=day, time=time).count() < 1:
+                                AppointmentForm = Appointment.objects.get_or_create(
+                                    user=user,
+                                    service=service,
+                                    day=day,
+                                    time=time,
+                                )
+                                messages.success(request, "Appointment Saved!")
+                                return redirect('index')
+                            else:
+                                messages.success(request, "The Selected Time Has Been Reserved Before!")
+                        else:
+                            messages.success(request, "The Selected Day Is Full!")
+                    else:
+                        messages.success(request, "The Selected Date Is Incorrect")
+                else:
+                    messages.success(request, "The Selected Date Isn't In The Correct Time Period!")
+            else:
+                messages.success(request, "Please Select A Service!")
+
+    # Ensure the times list is always passed to the template
+    hour = checkTime(times, day) if day else times
+    return render(request, 'Patient/Main/appointment.html', {
         'weekdays': weekdays,
         'validateWeekdays': validateWeekdays,
-        'times': available_hours if request.method == 'POST' else [],
+        'times': times,  # Pass the full times list to the template
     })
+
 def contact(request) :
     return render(request, "Patient\Main\contact.html",context={})
 def about(request) :
     return render(request, "Patient/Main/about.html",context={})
+
 def userprofile(request) :
-    return render(request, "Patient/Main/userprofile.html",context={})
-def appointment(request) :
-    return render(request, "Patient/Main/appointment.html",context={})
+    data = PatientProfile.objects.filter(user_id = request.user)
+    return render(request, "Patient/Main/userprofile.html",{'data':data})
+# def appointment(request) :
+#     return render(request, "Patient/Main/appointment.html",context={})
 def prediction(request) :
     return render(request, "Patient/Main/Prediction.html",context={})
 def BMI(request) :
@@ -117,13 +155,17 @@ def patient_register(request):
     if request.method == 'POST':
         name=request.POST['name']
         email=request.POST['email']
-        phone_no=request.POST['phone_no']
-        password=request.POST['password']
-        role='Patient'
-        user=User.objects.create_user(username=email)
-        user.set_password(password)
-        user.save()
-        PatientProfile.objects.create(user=user,email=email,name=name,phone_no=phone_no,role=role)
+        if User.objects.filter(username=email).exists():
+            msg = 'username already exists!'
+            return render(request, 'Patient/Main/login.html',{'msg':msg})
+        else:
+            phone_no=request.POST['phone_no']
+            password=request.POST['password']
+            role='Patient'
+            user=User.objects.create_user(username=email,email=email)
+            user.set_password(password)
+            user.save()
+            PatientProfile.objects.create(user=user,email=email,name=name,phone_no=phone_no,role=role)
 
         login(request,user)
 
@@ -134,7 +176,6 @@ def user_login(request):
     if request.method == 'POST':
         username = request.POST.get('email')
         password = request.POST.get('password')
-        
         user = authenticate(request,username=username,password=password)
         if user is not None and user.is_active:
             # Redirect based on user role

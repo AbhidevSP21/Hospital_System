@@ -1,0 +1,51 @@
+{% extends 'Patient/Base.html' %}
+{% block content %}
+<div class="container mt-5">
+    <h3>Your Profile</h3>
+    <table class="table table-bordered">
+        {% for item in update %}
+        {% if user.id == user.id %}
+        <tr>
+            <th>Full Name</th>
+            <td>{{ item.full_name }}</td>
+        </tr>
+        <tr>
+            <th>Email</th>
+            <td>{{ item.email }}</td>
+        </tr>
+        <tr>
+            <th>Phone</th>
+            <td>{{ item.phone }}</td>
+        </tr>
+        <tr>
+            <th>Date of Birth</th>
+            <td>{{ item.dob }}</td>
+        </tr>
+        <tr>
+            <th>Blood Group</th>
+            <td>{{ item.blood_group }}</td>
+        </tr>
+        <tr>
+            <th>Medical History</th>
+            <td>{{ item.medical_history }}</td>
+        </tr>
+        <tr>
+            <th>Emergency Contact</th>
+            <td>{{ item.emergency_contact }}</td>
+        </tr>
+        <tr>
+            <th>Profile Picture</th>
+            <td>
+                {% if item.image %}
+                    <img src="{{ item.image.url }}" alt="Profile Picture" class="img-thumbnail" width="150px">
+                {% else %}
+                    <p>No profile picture available</p>
+                {% endif %}
+            </td>
+        </tr>
+        {% endif %}
+        {% endfor %}
+    </table>
+    <a href="{% url 'index' %}" class="btn btn-primary">Back to Home</a>
+</div>
+{% endblock content %}
