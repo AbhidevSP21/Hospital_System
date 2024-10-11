@@ -25,7 +25,7 @@
                                     class="rounded-circle" width="150">
                                 <div class="mt-3">
                                     {% for i in data %}
-                                    <h4>{{i.name}}</h4>
+                                    <h4>{{request.user.first_name}} {{request.user.last_name}}</h4>
                                     
                                     <p class="text-secondary mb-1">{{request.user.username}}</p>
                                     <p class="text-muted font-size-sm">{{i.phone_no}}</p>
@@ -55,7 +55,7 @@
                                 </div>
                                 {% for i in data %}
                                 <div class="col-sm-9 text-secondary">
-                                    {{i.name}}
+                                    {{request.user.first_name}} {{request.user.last_name}}
                                 </div>
                             </div>
                             <hr>
@@ -81,10 +81,10 @@
                             <hr>
                             <div class="row">
                                 <div class="col-sm-3">
-                                    <h6 class="mb-0">Position</h6>
+                                    <h6 class="mb-0">Blood Group</h6>
                                 </div>
                                 <div class="col-sm-9 text-secondary">
-                                    {{i.CurrentStatus}}, {{i.Institution}}
+                                    {{i.blood_group}}
                                 </div>
                             </div>
                             {% endfor %}
@@ -92,7 +92,7 @@
                             <div class="row">
                                 <div class="col-sm-12">
                                     <a class="btn btn-info " target="__blank"
-                                        href="#">Edit</a>
+                                        href="{% url 'editprofile' %}">Edit</a>
                                 </div>
                             </div>
                         </div>

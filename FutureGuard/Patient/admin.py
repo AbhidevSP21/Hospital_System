@@ -1,6 +1,6 @@
 from django.contrib import admin
-from .models import PatientProfile, feedback
+from .models import PatientProfile, feedback, Appointment
 
-# Register your models here.
 admin.site.register(PatientProfile)
 admin.site.register(feedback)
+admin.site.register(Appointment)
