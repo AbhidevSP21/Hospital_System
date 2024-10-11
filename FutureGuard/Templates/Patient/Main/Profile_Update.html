@@ -1,0 +1,9 @@
+{% extends 'Patient/Base.html' %}
+{% block content %}
+<div class="container">
+    <h3>Profile Updated Successfully!</h3>
+    <p>Your medical profile has been updated successfully.</p>
+    <a href="{% url 'index' %}" class="btn btn-primary">Go to Homepage</a>
+    <a href="{% url 'viewprofile' %}" class="btn btn-secondary">View Profile</a>
+</div>
+{% endblock %}

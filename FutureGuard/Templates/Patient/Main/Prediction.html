@@ -1,118 +1,72 @@
-{% extends 'Patient/Base.html' %} 
+{% extends 'Patient/Base.html' %}
 {% load static %}
 
-
 {% block content %}
-
-<head>
-<style>
-body {
-    font-family: 'Arial', sans-serif;
-    margin: 0;
-    padding: 0;
-    background: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);
-    color: #333;
-}
-
-.container {
-    width: 80%;
-    margin: auto;
-    background: white;
-    padding: 20px;
-    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    background: #ffffff; /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #e3ffe7, #d9e7ff); /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #e3ffe7, #d9e7ff); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-}
-
-header h1 {
-    color: #ff6347;
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-nav ul {
-    list-style-type: none;
-    text-align: center;
-    padding: 0;
-}
-
-nav ul li {
-    display: inline;
-    margin-right: 10px;
-}
-
-nav ul li a {
-    text-decoration: none;
-    color: #333;
-    font-weight: bold;
-    background-color: #e3f2fd;
-    padding: 10px 20px;
-    border-radius: 20px;
-    transition: background-color 0.3s;
-}
-
-nav ul li a:hover {
-    background-color: #b3e5fc;
-}
-
-.prediction-form h2, .result h2 {
-    color: #ff6347;
-}
-
-#symptomsInput {
-    width: 300px;
-    padding: 10px;
-    border: 2px solid #b3e5fc;
-    border-radius: 4px;
-}
-
-button {
-    background-color: #ff6347;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-    border-radius: 4px;
-    transition: background-color 0.3s;
-}
-
-button:hover {
-    background-color: #ff8267;
-}
-
-.result {
-    margin-top: 20px;
-    padding: 20px;
-    background-color: #f1f8e9;
-    border-left: 5px solid #ff6347;
-    border-radius: 4px;
-}
-
-        
-</style>
-</head>
+<section class="disease-prediction">
     <div class="container">
-        <header>
-            <h1>Disease Prediction using Machine Learning</h1>
-        </header>
-        <nav>
-            <ul>
-                <li><a href="#">Diabetes Prediction</a></li>
-                <li><a href="#">Heart Disease Prediction</a></li>
-                <li><a href="#">Parkinson Prediction</a></li>
-                <!-- Add more links as needed -->
-            </ul>
-        </nav>
-        <main>
-            <section class="prediction-form">
-                <h2>What are your symptoms?</h2>
-                <input type="text" placeholder="Enter symptoms" id="symptomsInput">
-                <button onclick="predictDisease()">Predict</button>
-            </section>
-           
-        </main>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="section-title">
+                    <h2>Predict Disease Based on Symptoms</h2>
+                    <p>Select symptoms from the dropdown list to get a prediction.</p>
+                </div>
+            </div>
+        </div>
+        <div class="row" >
+            <div class="col-lg-8 col-md-10 col-12 mx-auto">
+                <form class="form" action="#" method="post" multiple-class="">
+                    {% csrf_token %}
+                    <div class="container">
+                        <h2>Select Symptoms</h2>
+                        <div id="dropdownContainer">
+                            <div id="symptom-dropdowns">
+                                <div class="symptom-group">
+                                    <select name="symptoms" class="form-control wide" multiple required>
+                                        <option value="" selected> --SELECT SYMPTOM-- </option>
+                                        {% for symptom in symptoms %}
+                                            <option value="{{ symptom }}">{{ symptom }}</option>
+                                        {% endfor %}
+                                        
+                                    </select>
+                                    <button type="button" id="remove-symptom-btn" class="btn btn-primary m-3" onclick="deleteDropdown(this)">Delete</button>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="button" id="add-symptom-btn" class="btn btn-primary mt-3" onclick="addDropdown()">Add Another Symptom</button>
+                    </div>
+                    
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary mt-3">Predict Disease</button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
-    {% endblock content %}
+</section>
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+
+
+<script>
+    function addDropdown() {
+        // Get the dropdown container
+        const container = document.getElementById('dropdownContainer');
+        
+        // Clone the existing dropdown div
+        const newDropdown = container.firstElementChild.cloneNode(true);
+        
+        // Append the cloned dropdown to the container
+        container.appendChild(newDropdown);
+    }
+
+    function deleteDropdown(button) {
+        // Find the dropdown div containing the clicked button
+        const dropdown = button.parentElement;
+        
+        // Remove the dropdown div from the container
+        dropdown.remove();
+    }
+</script>
+{% endblock content %}
