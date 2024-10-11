@@ -1,42 +1,39 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'Admin/baseAdmin.html' %} 
+{% load static %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Appointments Page</title>
-</head>
 
-<body>
-
+{% block content %}
     <div id="page-content">
-        <h3>Appointments</h3>
-        <table class="table table-striped">
+        <h3 class="mb-4">Scheduled Appointments</h3>
+        <table class="table table-bordered">
             <thead>
                 <tr>
-                    <th>ID</th>
-                    <th>Patient</th>
-                    <th>Doctor</th>
+                    <th>Appointment ID</th>
+                    <th>Patient Name</th>
+                    <th>Doctor Name</th>
                     <th>Date</th>
+                    <th>Time</th>
+                    <th>Status</th>
                     <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
-                <!-- Dynamic Data Here -->
+                <!-- Sample Data Row -->
                 <tr>
                     <td>1</td>
-                    <td>Jane Smith</td>
-                    <td>Dr. John Doe</td>
-                    <td>2024-10-05</td>
+                    <td>John Doe</td>
+                    <td>Dr. Smith</td>
+                    <td>2024-10-15</td>
+                    <td>10:00 AM</td>
+                    <td>Scheduled</td>
                     <td>
-                        <button class="btn btn-warning btn-sm">Edit</button>
-                        <button class="btn btn-danger btn-sm">Delete</button>
+                        <a href="edit-appointment.html?id=1" class="btn btn-warning btn-sm">Edit</a>
+                        <button class="btn btn-danger btn-sm" onclick="confirmDelete(1)">Cancel</button>
                     </td>
                 </tr>
+                <!-- Additional appointment rows would go here -->
             </tbody>
         </table>
     </div>
 
-</body>
-
-</html>
+{% endblock content %}

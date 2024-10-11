@@ -1,28 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'Admin/baseAdmin.html' %} 
+{% load static %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Future Guard - Patients</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f8f9fa;
-            padding: 20px;
-        }
 
-        /* Table Styling */
-        .table th,
-        .table td {
-            vertical-align: middle;
-        }
-    </style>
-</head>
-
-<body>
+{% block content %}
 
     <div id="page-content">
         <h3 class="mb-4">Registered Patients</h3>
@@ -61,14 +41,7 @@
 
     <!-- Bootstrap JS and dependencies -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        function confirmDelete(patientId) {
-            if (confirm("Are you sure you want to remove this patient?")) {
-                // Add code to handle deletion
-                alert("Patient with ID " + patientId + " removed.");
-            }
-        }
-    </script>
-</body>
+    <script src="script.js"></script> <!-- Link to your extracted JS file -->
 
-</html>
+    
+{% endblock content %}

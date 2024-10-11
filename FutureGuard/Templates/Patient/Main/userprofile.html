@@ -24,10 +24,11 @@
                                 <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin"
                                     class="rounded-circle" width="150">
                                 <div class="mt-3">
-                                    <h4>{{request.user.username}}</h4>
                                     {% for i in data %}
-                                    <p class="text-secondary mb-1">{{i.CurrentStatus}}</p>
-                                    <p class="text-muted font-size-sm">{{i.Institution}}</p>
+                                    <h4>{{i.name}}</h4>
+                                    
+                                    <p class="text-secondary mb-1">{{request.user.username}}</p>
+                                    <p class="text-muted font-size-sm">{{i.phone_no}}</p>
                                     {% endfor %}
                                 </div>
                             </div>
@@ -52,8 +53,9 @@
                                 <div class="col-sm-3">
                                     <h6 class="mb-0">Full Name</h6>
                                 </div>
+                                {% for i in data %}
                                 <div class="col-sm-9 text-secondary">
-                                    {{request.user.username}}
+                                    {{i.name}}
                                 </div>
                             </div>
                             <hr>
@@ -70,9 +72,9 @@
                                 <div class="col-sm-3">
                                     <h6 class="mb-0">Phone</h6>
                                 </div>
-                                {% for i in data %}
+                                
                                 <div class="col-sm-9 text-secondary">
-                                    {{i.Phone}}
+                                    {{i.phone_no}}
                                 </div>
                                 
                             </div>
