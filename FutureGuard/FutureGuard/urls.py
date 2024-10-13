@@ -21,4 +21,5 @@ from FutureGuard import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include('Patient.urls')),
+    path('',include('FutureAdmin.urls')),
 ]

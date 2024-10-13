@@ -1,0 +1,47 @@
+{% extends 'Admin/baseAdmin.html' %} 
+{% load static %}
+
+
+{% block content %}
+
+    <div id="page-content">
+        <h3 class="mb-4">Registered Patients</h3>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Patient ID</th>
+                    <th>Name</th>
+                    <th>Age</th>
+                    <th>Gender</th>
+                    <th>Contact Info</th>
+                    <th>Registration Date</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Sample Data Row -->
+                <tr>
+                    <td>1</td>
+                    <td>John Doe</td>
+                    <td>30</td>
+                    <td>Male</td>
+                    <td>(123) 456-7890</td>
+                    <td>2024-01-15</td>
+                    <td>Active</td>
+                    <td>
+                        <a href="edit-patient.html?id=1" class="btn btn-warning btn-sm">Edit</a>
+                        <button class="btn btn-danger btn-sm" onclick="confirmDelete(1)">Remove</button>
+                    </td>
+                </tr>
+                <!-- Additional patient rows would go here -->
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script> <!-- Link to your extracted JS file -->
+
+    
+{% endblock content %}

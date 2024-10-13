@@ -223,6 +223,10 @@ def user_login(request):
             elif user.is_superuser == False and user.is_staff == False:
                 login(request, user)
                 return redirect('userprofile')  # redirect to 'userprofile' view
+            
+            elif user.is_superuser == True and user.is_staff == True:
+                login(request, user)
+                return redirect('admindashboard')  # redirect to 'userprofile' view
         
         else:
             # Wrong credentials or inactive user

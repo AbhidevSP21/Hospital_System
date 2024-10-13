@@ -1,0 +1,57 @@
+{% extends 'Admin/baseAdmin.html' %} 
+{% load static %}
+
+
+{% block content %}
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <h3 class="mb-4">Settings</h3>
+
+        <!-- General Settings -->
+        <h5>General Settings</h5>
+        <form>
+            <div class="mb-3">
+                <label for="siteTitle" class="form-label">Site Title</label>
+                <input type="text" class="form-control" id="siteTitle" placeholder="Enter site title">
+            </div>
+            <div class="mb-3">
+                <label for="logo" class="form-label">Upload Logo</label>
+                <input type="file" class="form-control" id="logo">
+            </div>
+            <div class="mb-3">
+                <label for="favicon" class="form-label">Upload Favicon</label>
+                <input type="file" class="form-control" id="favicon">
+            </div>
+            <button type="submit" class="btn btn-primary">Save Changes</button>
+        </form>
+
+        <!-- User Management -->
+        <h5 class="mt-5">User Management</h5>
+        <p>Manage admin users and roles here.</p>
+        <button class="btn btn-secondary">Manage Admin Users</button>
+
+        <!-- Notification Settings -->
+        <h5 class="mt-5">Notification Settings</h5>
+        <form>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="emailNotifications" checked>
+                <label class="form-check-label" for="emailNotifications">Enable Email Notifications</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="smsNotifications">
+                <label class="form-check-label" for="smsNotifications">Enable SMS Notifications</label>
+            </div>
+            <button type="submit" class="btn btn-primary mt-2">Save Notification Settings</button>
+        </form>
+
+        <!-- Security Settings -->
+        <h5 class="mt-5">Security Settings</h5>
+        <p>Manage security options like password policies and two-factor authentication.</p>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script> <!-- Link to your custom JS file if needed -->
+
+{% endblock content %}
