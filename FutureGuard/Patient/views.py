@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.models import User
@@ -22,68 +22,21 @@ def login_access(request):
 
 def doctorlist(request) :
     return render(request, "Patient\Main\doctorlist.html",context={})
-def profileupdate(request) :
-    return render(request, "Patient\Main\Profile_Update.html",context={})
 
-def editprofile(request) :
-    if request.method== 'POST':
-        name=request.POST.get('name')
-        email=request.POST.get('email')
-        phone=request.POST.get('phone')
-        dob=request.POST.get('dob')
-        blood_group=request.POST.get('blood_group')
-        emergency_contact=request.POST.get('emergency_contact')
-        profile_picture=request.FILES.get('image')
-        medical_report=request.FILES.get('doc')
+def profileupdate(request):
+    if request.method == 'POST':
+        # Retrieve user profile, return 404 if it does not exist
+        profile = get_object_or_404(PatientProfile, user=request.user)
 
-        # if 'phone' in request.POST and request.POST['phone'] is not None:
-        #     phone=request.POST['phone']
-        #     if PatientProfile.objects.filter(user=request.user,phone_no=phone).exists():
-        #         pass
-        #     else:
-        #         profile=PatientProfile.objects.create(user=request.user,phone_no=phone)
-        #         profile.save()
-        # if 'dob' in request.POST and request.POST['dob'] is not None:
-        #     dob=request.POST['dob']
-        #     if PatientProfile.objects.filter(user=request.user,dob=dob).exists():
-        #         pass
-        #     else:
-        #         profile=PatientProfile.objects.create(user=request.user,dob=dob)
-        #         profile.save()
-        # if 'blood_group' in request.POST and request.POST['blood_group'] is not None:
-        #     dob=request.POST['blood_group']
-        #     if PatientProfile.objects.filter(user=request.user,blood_group=blood_group).exists():
-        #         pass
-        #     else:
-        #         profile=PatientProfile.objects.create(user=request.user,blood_group=blood_group)
-        #         profile.save()
-        # if 'emergency_contact' in request.POST and request.POST['emergency_contact'] is not None:
-        #     emergency_contact=request.POST['emergency_contact']
-        #     if PatientProfile.objects.filter(user=request.user,emergency_contact=emergency_contact).exists():
-        #         pass
-        #     else:
-        #         profile=PatientProfile.objects.create(user=request.user,emergency_contact=emergency_contact)
-        #         profile.save()
-        # if 'profile_picture' in request.POST and request.POST['profile_picture'] is not None:
-        #     image=request.POST['image']
-        #     if PatientProfile.objects.filter(user=request.user,profile_picture=profile_picture).exists():
-        #         pass
-        #     else:
-        #         profile=PatientProfile.objects.create(user=request.user,profile_picture=profile_picture)
-        #         profile.save()
-        # if 'medical_report' in request.POST and request.POST['medical_report'] is not None:
-        #     image=request.POST['medical_report']
-        #     if PatientProfile.objects.filter(user=request.user,medical_report=medical_report).exists():
-        #         pass
-        #     else:
-        #         profile=PatientProfile.objects.create(user=request.user,medical_report=medical_report)
-        #         profile.save()
-        
+        # Extract form data
+        phone = request.POST.get('phone')
+        dob = request.POST.get('dob')
+        blood_group = request.POST.get('blood_group')
+        emergency_contact = request.POST.get('emergency_contact')
+        profile_picture = request.FILES.get('profile_picture')
+        medical_report = request.FILES.get('medical_report')
 
-        # Get or create a patient profile for the current user
-        profile, created = PatientProfile.objects.get_or_create(user=request.user)
-
-        # Update profile fields if they are present in the request
+        # Update profile fields if they are provided
         if phone:
             profile.phone_no = phone
         if dob:
@@ -97,13 +50,21 @@ def editprofile(request) :
         if medical_report:
             profile.medical_report = medical_report
 
-        # Save the updated profile
+        # Save the profile
         profile.save()
 
-        # Additional actions (e.g., redirect or render response) can be added here
+        # Display a success message
+        messages.success(request, "Profile updated successfully.")
 
+        # Redirect to the profile page or another page as needed
+        return redirect('userprofile')  # Replace 'profile_view' with the appropriate URL name
 
+    # Render the profile update template with context if needed
+    return render(request, "Patient/Main/Profile_Update.html")
 
+def editprofile(request) :
+    # update=PatientProfile.objects.all()
+    return render(request, "Patient\Main\editprofile.html")
 
     #     MedicalProfile.objects.create(
     #         name=name,
