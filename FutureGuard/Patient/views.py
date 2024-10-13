@@ -116,7 +116,7 @@ def editprofile(request) :
     #         medical_report=medical_report
 
     #     )
-    # update=MedicalProfile.objects.all()
+    #update=MedicalProfile.objects.all()
     return render(request, "Patient\Main\editprofile.html",{'update':update})
 def viewprofile(request):
     
