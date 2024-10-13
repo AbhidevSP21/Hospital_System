@@ -1,0 +1,83 @@
+{% extends 'Admin/baseAdmin.html' %} 
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+{% block content %}
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-light mb-4">
+            <div class="container-fluid">
+                <span class="navbar-brand">Admin Dashboard</span>
+                <form class="d-flex">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-light" type="submit">Search</button>
+                </form>
+                <div class="d-flex">
+                    <button class="btn btn-outline-light me-2">Chat With Us</button>
+                    <img src="https://via.placeholder.com/40" alt="profile" class="rounded-circle me-2">
+                    <span>Admin</span>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Page-Specific Content Goes Here -->
+        <div id="page-content">
+            <!-- This will be replaced by the content of individual pages -->
+        </div>
+    </div>
+
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Metrics -->
+        <div class="row">
+            <div class="col-md-3">
+                <div class="metric">
+                    <i class="fas fa-users"></i>
+                    <h3>Departments</h3>
+                    <p id="totalDepartments">8</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="metric">
+                    <i class="fas fa-user-md"></i>
+                    <h3>Doctors</h3>
+                    <p id="totalDoctors">14</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="metric">
+                    <i class="fas fa-procedures"></i>
+                    <h3>Patients</h3>
+                    <p id="totalPatients">1</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="metric">
+                    <i class="fas fa-calendar-check"></i>
+                    <h3>Appointments</h3>
+                    <p id="totalAppointments">3</p>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Chart Section -->
+        <div class="row mt-4">
+            <div class="col-md-6">
+                <canvas id="monthlyRegisteredUsersChart"></canvas>
+            </div>
+            <div class="col-md-6">
+                <canvas id="earningsChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}
+
+</html>

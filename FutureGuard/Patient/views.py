@@ -4,6 +4,9 @@ from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.models import User
 from .models import PatientProfile, feedback
 from django.contrib.auth.hashers import make_password
+import csv
+from django.conf import settings
+import os
 from datetime import datetime, timedelta
 from .models import *
 from django.contrib import messages
@@ -33,18 +36,87 @@ def editprofile(request) :
         profile_picture=request.FILES.get('image')
         medical_report=request.FILES.get('doc')
 
-        MedicalProfile.objects.create(
-            name=name,
-            email=email,
-            phone=phone,
-            dob=dob,
-            blood_group=blood_group,
-            emergency_contact=emergency_contact,
-            profile_picture=profile_picture,
-            medical_report=medical_report
+        # if 'phone' in request.POST and request.POST['phone'] is not None:
+        #     phone=request.POST['phone']
+        #     if PatientProfile.objects.filter(user=request.user,phone_no=phone).exists():
+        #         pass
+        #     else:
+        #         profile=PatientProfile.objects.create(user=request.user,phone_no=phone)
+        #         profile.save()
+        # if 'dob' in request.POST and request.POST['dob'] is not None:
+        #     dob=request.POST['dob']
+        #     if PatientProfile.objects.filter(user=request.user,dob=dob).exists():
+        #         pass
+        #     else:
+        #         profile=PatientProfile.objects.create(user=request.user,dob=dob)
+        #         profile.save()
+        # if 'blood_group' in request.POST and request.POST['blood_group'] is not None:
+        #     dob=request.POST['blood_group']
+        #     if PatientProfile.objects.filter(user=request.user,blood_group=blood_group).exists():
+        #         pass
+        #     else:
+        #         profile=PatientProfile.objects.create(user=request.user,blood_group=blood_group)
+        #         profile.save()
+        # if 'emergency_contact' in request.POST and request.POST['emergency_contact'] is not None:
+        #     emergency_contact=request.POST['emergency_contact']
+        #     if PatientProfile.objects.filter(user=request.user,emergency_contact=emergency_contact).exists():
+        #         pass
+        #     else:
+        #         profile=PatientProfile.objects.create(user=request.user,emergency_contact=emergency_contact)
+        #         profile.save()
+        # if 'profile_picture' in request.POST and request.POST['profile_picture'] is not None:
+        #     image=request.POST['image']
+        #     if PatientProfile.objects.filter(user=request.user,profile_picture=profile_picture).exists():
+        #         pass
+        #     else:
+        #         profile=PatientProfile.objects.create(user=request.user,profile_picture=profile_picture)
+        #         profile.save()
+        # if 'medical_report' in request.POST and request.POST['medical_report'] is not None:
+        #     image=request.POST['medical_report']
+        #     if PatientProfile.objects.filter(user=request.user,medical_report=medical_report).exists():
+        #         pass
+        #     else:
+        #         profile=PatientProfile.objects.create(user=request.user,medical_report=medical_report)
+        #         profile.save()
+        
 
-        )
-    update=MedicalProfile.objects.all()
+        # Get or create a patient profile for the current user
+        profile, created = PatientProfile.objects.get_or_create(user=request.user)
+
+        # Update profile fields if they are present in the request
+        if phone:
+            profile.phone_no = phone
+        if dob:
+            profile.dob = dob
+        if blood_group:
+            profile.blood_group = blood_group
+        if emergency_contact:
+            profile.emergency_contact = emergency_contact
+        if profile_picture:
+            profile.profile_picture = profile_picture
+        if medical_report:
+            profile.medical_report = medical_report
+
+        # Save the updated profile
+        profile.save()
+
+        # Additional actions (e.g., redirect or render response) can be added here
+
+
+
+
+    #     MedicalProfile.objects.create(
+    #         name=name,
+    #         email=email,
+    #         phone=phone,
+    #         dob=dob,
+    #         blood_group=blood_group,
+    #         emergency_contact=emergency_contact,
+    #         profile_picture=profile_picture,
+    #         medical_report=medical_report
+
+    #     )
+    # update=MedicalProfile.objects.all()
     return render(request, "Patient\Main\editprofile.html",{'update':update})
 def viewprofile(request):
     
@@ -144,28 +216,45 @@ def about(request) :
 def userprofile(request) :
     data = PatientProfile.objects.filter(user_id = request.user)
     return render(request, "Patient/Main/userprofile.html",{'data':data})
-# def appointment(request) :
-#     return render(request, "Patient/Main/appointment.html",context={})
-def prediction(request) :
-    return render(request, "Patient/Main/Prediction.html",context={})
-def BMI(request) :
-    return render(request, "Patient/Main/BMI.html",context={})
+
+def prediction(request):
+    # Define the path to your CSV file
+    # csv_path = os.path.join(settings.BASE_DIR, 'Data', 'symptoms.csv')
+    # Using the Data directory path in another part of your project
+    csv_path = settings.DATA_DIR / 'symptoms.csv'
+
+    symptoms = []
+
+    # Read symptoms from the CSV file
+    with open(csv_path, 'r') as csvfile:
+        reader = csv.reader(csvfile)
+        for row in reader:
+            symptoms.append(row[0])  # Assuming each symptom is in the first column
+
+    # Handle form submission
+    if request.method == 'POST':
+        selected_symptoms = request.POST.getlist('symptoms')
+        # Process selected_symptoms for prediction
+        # result = predict_disease(selected_symptoms)
+        # Pass result to template or redirect
+
+    return render(request, "Patient/Main/Prediction.html",{'symptoms': symptoms})
 
 def patient_register(request):
     if request.method == 'POST':
-        name=request.POST['name']
+        firstname=request.POST['firstname']
+        lastname=request.POST['lastname']
         email=request.POST['email']
         if User.objects.filter(username=email).exists():
             msg = 'username already exists!'
             return render(request, 'Patient/Main/login.html',{'msg':msg})
         else:
-            phone_no=request.POST['phone_no']
             password=request.POST['password']
             role='Patient'
-            user=User.objects.create_user(username=email,email=email)
+            user=User.objects.create_user(username=email,email=email,first_name=firstname,last_name=lastname)
             user.set_password(password)
             user.save()
-            PatientProfile.objects.create(user=user,email=email,name=name,phone_no=phone_no,role=role)
+            PatientProfile.objects.create(user=user,role=role)
 
         login(request,user)
 
@@ -186,6 +275,10 @@ def user_login(request):
             elif user.is_superuser == False and user.is_staff == False:
                 login(request, user)
                 return redirect('userprofile')  # redirect to 'userprofile' view
+            
+            elif user.is_superuser == True and user.is_staff == True:
+                login(request, user)
+                return redirect('admindashboard')  # redirect to 'userprofile' view
         
         else:
             # Wrong credentials or inactive user
