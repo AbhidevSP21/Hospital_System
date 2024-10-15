@@ -233,11 +233,11 @@ def user_login(request):
             # Redirect based on user role
             if user.is_superuser == False and user.is_staff == False:
                 login(request, user)
-                return redirect('index')  # redirect to the 'index' view
+                return redirect('userprofile') 
             
             elif user.is_superuser == False and user.is_staff == True:
                 login(request, user)
-                return redirect('userprofile')  # redirect to 'userprofile' view
+                return redirect('doctor_profile')  # redirect to 'userprofile' view
             
             elif user.is_superuser == True and user.is_staff == True:
                 login(request, user)

@@ -26,7 +26,7 @@ class PatientProfile(models.Model):
     emergency_contact = models.CharField(max_length=15,null=True)
     profile_picture = models.ImageField(upload_to='profile_pics/', blank=True, null=True)
     medical_report = models.FileField(upload_to='medical_docs/', blank=True, null=True)
-    prev_checkup = models.DateField(null=True)  # PDF upload
+    prev_checkup = models.DateField(null=True)
 
 class feedback(models.Model):
     user=models.ForeignKey(User,on_delete=models.CASCADE,default=0)
