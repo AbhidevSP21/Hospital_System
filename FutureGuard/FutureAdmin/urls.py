@@ -7,5 +7,10 @@ urlpatterns = [
     path('admindoctors',views.admindoctors,name='admindoctors'),
     path('adminpatients',views.adminpatients,name='adminpatients'),
     path('adminsettings',views.adminsettings,name='adminsettings'),
-
+    path('adminlogout',views.adminlogout,name='adminlogout'),
+    path('add-doctor/', views.add_doctor, name='add_doctor'),
+    path('edit_doctor/<int:doctor_id>/', views.edit_doctor, name='edit_doctor'),
+    path('delete_doctor/<int:doctor_id>/', views.delete_doctor, name='delete_doctor'),
+    
+    
 ]

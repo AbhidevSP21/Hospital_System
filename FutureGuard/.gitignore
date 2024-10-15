@@ -1,0 +1,15 @@
+db.sqlite3
+
+media/medical_docs/
+media/profile_pics/
+
+Doctor/migrations/
+Doctor/__pycache__/
+
+FutureAdmin/migrations/
+FutureAdmin/__pycache__/
+
+FutureGuard/__pycache__/
+
+Patient/migrations/
+Patient/__pycache__/
