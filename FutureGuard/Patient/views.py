@@ -10,6 +10,10 @@ import os
 from datetime import datetime, timedelta
 from .models import *
 from django.contrib import messages
+import joblib
+import numpy as np
+from keras.models import load_model
+from sklearn.preprocessing import LabelEncoder as le
 
 
 
@@ -85,10 +89,15 @@ def Patient_feedback(request) :
     data = PatientProfile.objects.filter(user_id = request.user)
     return render(request, "Patient/Main/feedback.html",{'data':data})
 
+from django.shortcuts import redirect, render
+from django.contrib import messages
+from datetime import datetime, timedelta
+from .models import Appointment  # Make sure to import your Appointment model
+
 def booking(request):
     user = request.user
-    weekdays = validWeekday(22)  # Calling 'validWeekday' Function to Loop days you want in the next 21 days
-    validateWeekdays = isWeekdayValid(weekdays)  # Only show the days that are not full
+    weekdays = validWeekday(22)  # Loop for the next 21 days
+    validateWeekdays = isWeekdayValid(weekdays)  # Show only available days
 
     times = [
         "3 PM", "3:30 PM", "4 PM", "4:30 PM", "5 PM", "5:30 PM", "6 PM", "6:30 PM", "7 PM", "7:30 PM"
@@ -96,10 +105,9 @@ def booking(request):
     today = datetime.now()
     minDate = today.strftime('%Y-%m-%d')
     deltatime = today + timedelta(days=21)
-    strdeltatime = deltatime.strftime('%Y-%m-%d')
-    maxDate = strdeltatime
+    maxDate = deltatime.strftime('%Y-%m-%d')
 
-    # Get stored data from django session (if exists):
+    # Initialize the session variables
     day = request.session.get('day')
     service = request.session.get('service')
 
@@ -108,16 +116,13 @@ def booking(request):
         if not service or not day:
             service = request.POST.get('service')
             day = request.POST.get('day')
-            if service is None:
-                messages.success(request, "Please Select A Service!")
+            if not service:
+                messages.error(request, "Please Select A Service!")
                 return redirect('booking')
 
-            # Store day and service in django session:
+            # Store day and service in django session for confirmation step
             request.session['day'] = day
             request.session['service'] = service
-
-            # Redirect to the same view (second step: confirming time)
-            return redirect('booking')
 
         # Second step: Selecting time and confirming appointment
         else:
@@ -129,32 +134,40 @@ def booking(request):
                     if date in ['Monday', 'Saturday', 'Wednesday']:
                         if Appointment.objects.filter(day=day).count() < 11:
                             if Appointment.objects.filter(day=day, time=time).count() < 1:
-                                AppointmentForm = Appointment.objects.get_or_create(
+                                Appointment.objects.create(
                                     user=user,
                                     service=service,
                                     day=day,
                                     time=time,
                                 )
                                 messages.success(request, "Appointment Saved!")
-                                return redirect('index')
+                                
+                                # Clear session data after successful booking
+                                del request.session['day']
+                                del request.session['service']
+
+                                return redirect('userprofile')
                             else:
-                                messages.success(request, "The Selected Time Has Been Reserved Before!")
+                                messages.error(request, "The Selected Time Has Been Reserved Before!")
                         else:
-                            messages.success(request, "The Selected Day Is Full!")
+                            messages.error(request, "The Selected Day Is Full!")
                     else:
-                        messages.success(request, "The Selected Date Is Incorrect")
+                        messages.error(request, "The Selected Date Is Incorrect")
                 else:
-                    messages.success(request, "The Selected Date Isn't In The Correct Time Period!")
+                    messages.error(request, "The Selected Date Isn't In The Correct Time Period!")
             else:
-                messages.success(request, "Please Select A Service!")
+                messages.error(request, "Please Select A Service!")
 
     # Ensure the times list is always passed to the template
     hour = checkTime(times, day) if day else times
     return render(request, 'Patient/Main/appointment.html', {
         'weekdays': weekdays,
         'validateWeekdays': validateWeekdays,
-        'times': times,  # Pass the full times list to the template
+        'times': hour,  # Pass the adjusted times list to the template
+        'current_service': service,  # Pass the current service to the template
     })
+
+
 
 def contact(request) :
     return render(request, "Patient\Main\contact.html",context={})
@@ -163,30 +176,82 @@ def about(request) :
 
 def userprofile(request) :
     data = PatientProfile.objects.filter(user_id = request.user)
-    return render(request, "Patient/Main/userprofile.html",{'data':data})
+    appoint = Appointment.objects.filter(user_id = request.user).order_by('-day')[:5]
+    prediction = Prediction.objects.filter(user_id = request.user)
+    return render(request, "Patient/Main/userprofile.html",{'data':data,'appoint':appoint, 'prediction':prediction})
 
 def prediction(request):
-    # Define the path to your CSV file
-    # csv_path = os.path.join(settings.BASE_DIR, 'Data', 'symptoms.csv')
-    # Using the Data directory path in another part of your project
-    csv_path = settings.DATA_DIR / 'symptoms.csv'
 
+
+    # Define the path to your CSV file
+    csv_path = settings.DATA_DIR / 'symptoms.csv'
     symptoms = []
 
     # Read symptoms from the CSV file
-    with open(csv_path, 'r') as csvfile:
-        reader = csv.reader(csvfile)
-        for row in reader:
-            symptoms.append(row[0])  # Assuming each symptom is in the first column
+    try:
+        with open(csv_path, 'r') as csvfile:
+            reader = csv.reader(csvfile)
+            for row in reader:
+                symptoms.append(row[0])  # Assuming each symptom is in the first column
+    except FileNotFoundError:
+        return render(request, "Patient/Main/Prediction.html", {'msg': "Error: Symptoms file not found."})
+
+    # Prepare default values for context
+    precautions = {}
+    msg = ""
 
     # Handle form submission
     if request.method == 'POST':
-        selected_symptoms = request.POST.getlist('symptoms')
-        # Process selected_symptoms for prediction
-        # result = predict_disease(selected_symptoms)
-        # Pass result to template or redirect
 
-    return render(request, "Patient/Main/Prediction.html",{'symptoms': symptoms})
+
+        selected_symptoms = request.POST.getlist('symptoms')
+        test_case = np.zeros(len(symptoms))  # Initialize all symptoms to False (0)
+        
+        for symptom in selected_symptoms:
+            if symptom in symptoms:
+                test_case[symptoms.index(symptom)] = 1  # Set True (1) for specified symptoms
+
+        # Reshape for prediction
+        test_case = test_case.reshape(1, -1)
+        
+        try:
+            # Load the prediction model and label encoder
+            preds = load_model("Data\Model\prediction.h5")
+            le = joblib.load("Data\Model\le.joblib")
+            
+            # Perform prediction
+            predicted_disease_prob = preds.predict(test_case)
+            disease_index = np.argmax(predicted_disease_prob)
+            predicted_disease = le.inverse_transform([disease_index])[0]
+            
+            msg = f"Predicted Disease: {predicted_disease}. Please consult the doctor for further checkup." 
+            
+            # Retrieve precautions for the predicted disease
+            with open("Data\Model\symptom_precaution.csv", 'r', newline='', encoding='utf-8') as file:
+                reader1 = csv.DictReader(file, delimiter=',')
+                for row in reader1:
+                    if row['Disease'].strip().lower() == predicted_disease.strip().lower():
+                        precautions = {
+                            'precaution1': row.get('Precaution_1'),
+                            'precaution2': row.get('Precaution_2'),
+                            'precaution3': row.get('Precaution_3'),
+                            'precaution4': row.get('Precaution_4'),
+                        }
+                        break
+
+        except FileNotFoundError:
+            msg = "Error: Model or precaution file not found."
+        except TypeError as e:
+            msg = f"Error: {str(e)}"
+        
+        user_id=request.user.id
+        user=User.objects.get(id=user_id)
+        prediction_record = Prediction(user=user, predicted_disease=predicted_disease)
+        prediction_record.save()
+    
+    # Render the form and pass precautions and symptoms data
+    return render(request, "Patient/Main/Prediction.html", {'symptoms': symptoms, 'msg': msg, 'precautions': precautions})
+
 
 def patient_register(request):
     if request.method == 'POST':

@@ -3,45 +3,70 @@
 {% load static %}
 {% block content %}
 
-<h1 class="text-center mt-3">Online Booking</h1>
+<div class="container mt-4">
+    <h1 class="text-center mt-3">Online Booking</h1>
 
-<div class="shadow p-4 mb-5 bg-body bg-body rounded text-black m-5">
-    <form method="post" action="{% url 'booking' %}" class="me-2 ms-2" required>
-        {% csrf_token %}
+    <div class="shadow p-4 mb-5 bg-body rounded text-black">
+        <form method="post" action="{% url 'booking' %}" class="me-2 ms-2" required>
+            {% csrf_token %}
 
-        <!--input service-->
-        <div>
-            <h3 class="">Select Service:</h3>
-            <select class="form-select fs-3" name="service">
-                <option value="Doctor care">Doctor care</option>
-                <option value="Nursing care">Nursing care</option>
-                <option value="Medical social services">Medical social services</option>
-                <option value="Homemaker or basic assistance care">Homemaker or basic assistance care</option>
-            </select>
+            <!-- Select Service -->
+            <div class="mb-4">
+                <label for="service" class="form-label fs-5">Select Service:</label>
+                <select id="service" class="form-select fs-4" name="service" required>
+                    <option value="" disabled selected>Select a Department</option>
+                    <option value="Dermatology">Dermatology (Skin)</option>
+                    <option value="Allergy and Immunology">Allergy and Immunology</option>
+                    <option value="Gastroenterology">Gastroenterology (Digestive System)</option>
+                    <option value="Endocrinology">Endocrinology (Hormones)</option>
+                    <option value="Pulmonology">Pulmonology (Respiratory System)</option>
+                    <option value="Cardiology">Cardiology (Heart)</option>
+                    <option value="Neurology">Neurology (Nervous System)</option>
+                    <option value="Infectious Disease">Infectious Disease</option>
+                    <option value="Hematology">Hematology (Blood Disorders)</option>
+                    <option value="Hepatology">Hepatology (Liver)</option>
+                    <option value="Orthopedics">Orthopedics (Bones and Muscles)</option>
+                    <option value="Urology">Urology</option>
+                    <option value="Proctology">Proctology (Anal and Rectal Diseases)</option>
+                    <option value="Vascular Surgery">Vascular Surgery</option>
+                </select>
+            </div>
+
+            <!-- Select Day -->
+            <div class="mb-4">
+                <label for="day" class="form-label fs-5">Select Day:</label>
+                <select id="day" class="form-select fs-4" name="day" required>
+                    <option value="" disabled selected>Select the Day</option>
+                    {% for validateWeekday in validateWeekdays %}
+                    <option value="{{validateWeekday}}">{{validateWeekday}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <!-- Select Time -->
+            <div class="mb-4">
+                <label for="time" class="form-label fs-5">Time:</label>
+                <select id="time" class="form-select fs-4" name="time" required>
+                    <option value="" disabled selected>Select the time</option>
+                    {% for time in times %}
+                    <option value="{{time}}">{{time}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary text-white fs-5">Submit</button>
+            </div>
+        </form>
+        <div class="container">
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
         </div>
-
-        <!--input day-->
-        <div class="mt-3">
-            <h3 class="">Select Day:</h3>
-            <select class="form-select fs-3" name="day">
-                {% for validateWeekday in validateWeekdays %}
-                <option value="{{validateWeekday}}">{{validateWeekday}}</option>
-                {% endfor %}
-            </select>
-        </div>
-
-        <!--input time-->
-        <div class="mt-3">
-            <h3 class="">Time:</h3>
-            <select class="form-select fs-3 " name="time">
-                {% for time in times %}
-                <option value="{{time}}">{{time}}</option>
-                {% endfor %}
-            </select>
-        </div>
-
-        <button type="submit" class="btn btn-primary text-white mt-3">Submit</button>
-    </form>
+    </div>
 </div>
 
 {% endblock content %}

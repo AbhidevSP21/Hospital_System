@@ -101,38 +101,25 @@
                         <div class="col-sm-6 mb-3">
                             <div class="card h-100">
                                 <div class="card-body">
-                                    <h6 class="d-flex align-items-center mb-3">My Interests</h6>
-                                    {% for i in interest %}
-                                    <small>{{i.Subject}}</small>
-                                    {% if i.Teaching_status == 0 %}
-                                    <a class="btn btn-info float-end "
-                                        href="{% url 'teach_noti' id=i.id %}">TEACH</a>
-                                        {% elif i.Teaching_status == 1 %}
-                                        <a class="btn btn-info float-end "
-                                        href="#">REQUESTED</a>
-                                        {% elif i.Teaching_status == 2 %}
-                                        <a class="btn btn-info float-end "
-                                        href="#">ACCEPTED</a>
-                                        {% endif %}
+                                    <h6 class="d-flex align-items-center mb-3">My Bookings</h6>
+                                    {% for i in appoint %}
+                                    <small>{{i.day}} {{i.time}} {{i.service}}</small>
+                                    {% if i.status == 0 %}
+                                    <p class="text-primary">Requested</p>
+                                    {% elif i.status == 1 %}
+                                    <p class="text-success">Approved</p>
+                                    {% endif %}
                                     <hr>
                                     {% endfor %}
-                                    <!-- <small>DataBase Management System</small>
-                                    <a class="btn btn-info float-end" target="__blank"
-                                        href="">Teach</a>
-                                    <hr>
-                                    <small>Django</small>
-                                    <a class="btn btn-info float-end" target="__blank"
-                                        href="">Teach</a>
-                                    <hr> -->
                                 </div>
                             </div>
                         </div>
                         <div class="col-sm-6 mb-3">
                             <div class="card h-100">
                                 <div class="align card-body">
-                                    <h6 class="d-flex align-items-center mb-3">I have to Improve</h6>
-                                    {% for k in improvement %}
-                                            <a href="{% url 'lists' sub=k.Learning %}"><small>{{k.Learning}}</small></a><hr>  
+                                    <h6 class="d-flex align-items-center mb-3">My Predictions</h6>
+                                    {% for k in prediction %}
+                                            <small>{{k.predicted_disease}} on {{k.created_at}}</small><hr>  
                                     {% endfor %}
                                     
                                     
