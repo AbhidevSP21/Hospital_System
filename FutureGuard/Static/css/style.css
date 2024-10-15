@@ -4067,3 +4067,31 @@ body{
 /*=========================
 	End Footer CSS
 ===========================*/
+
+.output-box {
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        background-color: #f9f9f9;
+        max-width: 600px;
+        margin: 0 auto;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.predicted-disease {
+        font-size: 24px;
+        color: #333;
+}
+.precautions h4 {
+        font-size: 20px;
+        color: #007bff;
+        margin-bottom: 10px;
+}
+.precaution-list {
+        list-style-type: none;
+        padding: 0;
+        font-size: 16px;
+        color: #555;
+}
+.precaution-list li {
+        margin: 5px 0;
+}
+

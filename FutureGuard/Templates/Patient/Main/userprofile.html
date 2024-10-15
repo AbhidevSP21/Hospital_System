@@ -97,6 +97,7 @@
                             </div>
                         </div>
                     </div>
+<<<<<<< HEAD
                 </div>
                 <div class="row gutters-sm">
                     <div class="col-sm-6 mb-3">
@@ -135,6 +136,35 @@
                                 {% endfor %}
 
 
+=======
+                    <div class="row gutters-sm">
+                        <div class="col-sm-6 mb-3">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <h6 class="d-flex align-items-center mb-3">My Bookings</h6>
+                                    {% for i in appoint %}
+                                    <small>{{i.day}} {{i.time}} {{i.service}}</small>
+                                    {% if i.status == 0 %}
+                                    <p class="text-primary">Requested</p>
+                                    {% elif i.status == 1 %}
+                                    <p class="text-success">Approved</p>
+                                    {% endif %}
+                                    <hr>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 mb-3">
+                            <div class="card h-100">
+                                <div class="align card-body">
+                                    <h6 class="d-flex align-items-center mb-3">My Predictions</h6>
+                                    {% for k in prediction %}
+                                            <small>{{k.predicted_disease}} on {{k.created_at}}</small><hr>  
+                                    {% endfor %}
+                                    
+                                    
+                                </div>
+>>>>>>> 9e565b8648ba20e414ed1b826d698fac1f8b3833
                             </div>
                         </div>
                     </div>
