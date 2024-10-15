@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, authenticate, logout
 from .models import Doctor
+from django.contrib.auth.hashers import make_password
+from django.contrib.auth.models import User
 
 def admindashboard(request):
     return render(request, 'Admin/MainAdmin/bDbAdmin.html',context={})
@@ -27,14 +29,19 @@ def adminlogout(request):
     logout(request)
     return redirect("index")
 
+
 def add_doctor(request):
     if request.method == 'POST':
         name = request.POST.get('doctorName')
         specialization = request.POST.get('specialization')
         contact = request.POST.get('contact')
+        email = request.POST.get('email')
+        password = request.POST.get('password')
 
-        # Create a new doctor instance and save it to the database
-        doctor = Doctor(name=name, specialization=specialization, contact=contact)
+        hashed_password = make_password(password)
+        
+        user = User.objects.create(first_name=name, username=email,email=email,password=hashed_password,is_staff=True)
+        doctor = Doctor(user=user, specialization=specialization, contact=contact, email=email, password=password)
         doctor.save()
 
         return redirect('admindoctors')  # Redirect to the doctor page after saving

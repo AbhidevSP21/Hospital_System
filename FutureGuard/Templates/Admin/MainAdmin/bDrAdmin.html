@@ -23,13 +23,16 @@
           <!-- Example doctor entry -->
           {% for d in doctors %}
             <tr>
-              <td>{{ d.id }}</td>
-              <td>{{ d.name }}</td>
+              <td>{{ forloop.counter }}</td>
+              <td>{{ d.user.first_name }}</td>
               <td>{{ d.specialization }}</td>
               <td>{{ d.contact }}</td>
+              <td>{{ d.email }}</td>
               <td>
-                {% comment %} <button class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editDoctorModal" onclick="populateEditModal({{ d.id }}, '{{ d.name }}', '{{ d.specialization }}', '{{ d.contact }}'), '{{d.id }}">Edit</button> {% endcomment %}
-                <button class="btn btn-danger btn-sm" onclick="alert('Do you want to delete this Doctor?')"><a style="color:white; text-decoration: None;" href="{% url 'delete_doctor' doctor_id=d.id %}">Delete</a></button>
+                {% comment %}
+                <button class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editDoctorModal" onclick="populateEditModal({{ d.id }}, '{{ d.name }}', '{{ d.specialization }}', '{{ d.contact }}', '{{ d.email }}')">Edit</button>
+                {% endcomment %}
+                <button class="btn btn-danger btn-sm" onclick="alert('Do you want to delete this Doctor?')"><a style="color:white; text-decoration: none;" href="{% url 'delete_doctor' doctor_id=d.id %}">Delete</a></button>
               </td>
             </tr>
           {% endfor %}
@@ -62,13 +65,20 @@
               <label for="contact" class="form-label">Contact</label>
               <input type="text" class="form-control" id="contact" name="contact" required />
             </div>
+            <div class="mb-3">
+              <label for="email" class="form-label">Email</label>
+              <input type="email" class="form-control" id="email" name="email" required />
+            </div>
+            <div class="mb-3">
+              <label for="password" class="form-label">Password</label>
+              <input type="password" class="form-control" id="password" name="password" required />
+            </div>
             <button type="submit" class="btn btn-primary">Add Doctor</button>
           </form>
         </div>
       </div>
     </div>
   </div>
-
 
   <!-- Edit Doctor Modal -->
   <div class="modal fade" id="editDoctorModal" tabindex="-1" aria-labelledby="editDoctorModalLabel" aria-hidden="true">
@@ -79,7 +89,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form method="POST" id="editDoctorForm" >
+          <form method="POST" id="editDoctorForm">
             {% csrf_token %}
             <div class="mb-3">
               <label for="editDoctorName" class="form-label">Doctor's Name</label>

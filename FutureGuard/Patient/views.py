@@ -231,11 +231,11 @@ def user_login(request):
         user = authenticate(request,username=username,password=password)
         if user is not None and user.is_active:
             # Redirect based on user role
-            if user.is_superuser == False and user.is_staff == True:
+            if user.is_superuser == False and user.is_staff == False:
                 login(request, user)
                 return redirect('index')  # redirect to the 'index' view
             
-            elif user.is_superuser == False and user.is_staff == False:
+            elif user.is_superuser == False and user.is_staff == True:
                 login(request, user)
                 return redirect('userprofile')  # redirect to 'userprofile' view
             
