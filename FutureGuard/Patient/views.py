@@ -47,6 +47,7 @@ def profileupdate(request):
             profile.emergency_contact = emergency_contact
         if profile_picture:
             profile.profile_picture = profile_picture
+            print(profile.profile_picture)
         if medical_report:
             profile.medical_report = medical_report
 
@@ -175,7 +176,8 @@ def about(request) :
     return render(request, "Patient/Main/about.html",context={})
 
 def userprofile(request) :
-    data = PatientProfile.objects.filter(user_id = request.user)
+    usr = request.user
+    data = PatientProfile.objects.get(user_id = usr.id)
     return render(request, "Patient/Main/userprofile.html",{'data':data})
 
 def prediction(request):

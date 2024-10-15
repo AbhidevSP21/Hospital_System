@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor Profile</title>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{% static 'css\doctorhome.css' %}" rel="stylesheet">
+</head>
+<body>
+
+<section id="content" class="container">
+    <!-- Begin .page-heading -->
+    <div class="page-heading">
+        <div class="media clearfix">
+            <div class="media-left pr30">
+                <a href="#">
+                    <img class="media-object mw150" src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="...">
+                </a>
+            </div>                      
+            <div class="media-body va-m">
+                <h2 class="media-heading">Dr. Michael Halls
+                    <small> - Cardiologist</small>
+                </h2>
+                <p class="lead">Experienced in treating cardiovascular diseases with over 10 years of practice in top hospitals.</p>
+                <div class="media-links">
+                    <ul class="list-inline list-unstyled">
+                        <li>
+                            <a href="#" title="facebook link">
+                                <span class="fa fa-facebook-square fs35 text-primary"></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" title="twitter link">
+                                <span class="fa fa-twitter-square fs35 text-info"></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" title="email link">
+                                <span class="fa fa-envelope-square fs35 text-muted"></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" title="phone link">
+                                <span class="fa fa-phone-square fs35 text-system"></span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Row -->
+    <div class="row">
+        <!-- Doctor Details Section -->
+        <div class="col-md-4">
+            <!-- Doctor's Specialization and Popularity Panel -->
+            <div class="panel">
+                <div class="panel-heading">
+                    <span class="panel-icon">
+                        <i class="fa fa-user-md"></i>
+                    </span>
+                    <span class="panel-title"> Medical Expertise</span>
+                </div>
+                <div class="panel-body">
+                    <ul>
+                        <li>Cardiovascular Diseases</li>
+                        <li>Hypertension Management</li>
+                        <li>Cholesterol Control</li>
+                        <li>Heart Surgery Consultations</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Doctor's Skills Panel -->
+            <div class="panel">
+                <div class="panel-heading">
+                    <span class="panel-icon">
+                        <i class="fa fa-trophy"></i>
+                    </span>
+                    <span class="panel-title"> My Skills</span>
+                </div>
+                <div class="panel-body pb5">
+                    <span class="label label-primary mr5 mb10 ib lh15">Cardiology</span>
+                    <span class="label label-success mr5 mb10 ib lh15">Surgery Consultations</span>
+                    <span class="label label-warning mr5 mb10 ib lh15">Patient Care</span>
+                </div>
+            </div>
+
+            <!-- About Doctor Section -->
+            <div class="panel">
+                <div class="panel-heading">
+                    <span class="panel-icon">
+                        <i class="fa fa-pencil"></i>
+                    </span>
+                    <span class="panel-title">About Me</span>
+                </div>
+                <div class="panel-body pb5">
+                    <h6>Experience</h6>
+                    <h4>Consultant Cardiologist</h4>
+                    <p class="text-muted">City Hospital, 2012 - Present</p>
+
+                    <hr class="short br-lighter">
+
+                    <h6>Education</h6>
+                    <h4>Doctor of Medicine (MD)</h4>
+                    <p class="text-muted">Harvard Medical School, 2006 - 2010</p>
+
+                    <hr class="short br-lighter">
+
+                    <h6>Accomplishments</h6>
+                    <h4>Best Cardiologist Award</h4>
+                    <p class="text-muted">Awarded by the American Heart Association in 2020.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Appointment and Patient Information Section -->
+        <div class="col-md-8">
+            <div class="tab-block">
+                <ul class="nav nav-tabs">
+                    <li class="active">
+                        <a href="#appointments" data-toggle="tab">Appointments</a>
+                    </li>
+                    <li>
+                        <a href="#patients" data-toggle="tab">Patient Information</a>
+                    </li>
+                    <li>
+                        <a href="#activity" data-toggle="tab">Activity</a>
+                    </li>
+                </ul>
+                <div class="tab-content p30" style="height: 730px;">
+                    <!-- Appointments Tab -->
+                    <div id="appointments" class="tab-pane active">
+                        <h4>Upcoming Appointments</h4>
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Time</th>
+                                    <th>Patient Name</th>
+                                    <th>Condition</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>October 15, 2024</td>
+                                    <td>10:00 AM</td>
+                                    <td>John Doe</td>
+                                    <td>Hypertension</td>
+                                </tr>
+                                <tr>
+                                    <td>October 16, 2024</td>
+                                    <td>2:00 PM</td>
+                                    <td>Jane Smith</td>
+                                    <td>Heart Checkup</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <button class="btn btn-primary">View All Appointments</button>
+                    </div>
+
+                    <!-- Patient Information Tab -->
+                    <div id="patients" class="tab-pane">
+                        <h4>Recent Patients</h4>
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Age</th>
+                                    <th>Condition</th>
+                                    <th>Last Visit</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Emily White</td>
+                                    <td>65</td>
+                                    <td>Coronary Artery Disease</td>
+                                    <td>October 12, 2024</td>
+                                </tr>
+                                <tr>
+                                    <td>David Brown</td>
+                                    <td>72</td>
+                                    <td>Heart Failure</td>
+                                    <td>October 10, 2024</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <button class="btn btn-info">View Patient Details</button>
+                    </div>
+
+                    <!-- Activity Tab -->
+                    <div id="activity" class="tab-pane">
+                        <div class="media">
+                            <a class="pull-left" href="#">
+                                <img class="media-object mn thumbnail mw50" src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="...">
+                            </a>
+                            <div class="media-body">
+                                <h5 class="media-heading mb20">Dr. Michael Halls Posted
+                                    <small> - 3 hours ago</small>
+                                </h5>
+                                <p>Heart health tips for managing blood pressure.</p>
+                                <div class="media-links">
+                                    <span class="text-light fs12 mr10">
+                                        <span class="fa fa-thumbs-o-up text-primary mr5"></span> Like 
+                                    </span>
+                                    <span class="text-light fs12 mr10">
+                                        <span class="fa fa-share text-primary mr5"></span> Share 
+                                    </span>
+                                    <span class="text-light fs12 mr10">
+                                        <span class="fa fa-comment text-primary mr5"></span> Comment 
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div> <!-- end tab-content -->
+            </div> <!-- end tab-block -->
+        </div> <!-- end col-md-8 -->
+    </div> <!-- end row -->
+</section>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</body>
+</html>

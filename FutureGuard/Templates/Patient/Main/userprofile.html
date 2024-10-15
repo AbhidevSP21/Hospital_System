@@ -11,112 +11,110 @@
 
 <body> -->
 {% extends 'Patient/Base.html' %}
-
+{% load static %}
 {% block content %}
-    <div class="container">
-        <div class="main-body mt-5">
+<div class="container">
+    <div class="main-body mt-5">
 
-            <div class="row gutters-sm">
-                <div class="col-md-4 mb-3">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="d-flex flex-column align-items-center text-center">
-                                <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin"
-                                    class="rounded-circle" width="150">
-                                <div class="mt-3">
-                                    {% for i in data %}
-                                    <h4>{{request.user.first_name}} {{request.user.last_name}}</h4>
-                                    
-                                    <p class="text-secondary mb-1">{{request.user.username}}</p>
-                                    <p class="text-muted font-size-sm">{{i.phone_no}}</p>
-                                    {% endfor %}
-                                </div>
-                            </div>
+        <div class="row gutters-sm">
+            <div class="col-md-4 mb-3">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex flex-column align-items-center text-center">
+                                <!-- {% if i.user_id == user_id %} -->
+                                    {% if data.profile_picture %}
+                                        <img src="{{ data.profile_picture.url }}" alt="Profile Image" class="rounded-circle" width="150">
+                                    {% else %}
+                                        <img src="{% static 'img/signup-bg.jpg' %}" alt="Profile Image" class="rounded-circle" width="150">
+                                    {% endif %}
+                                    <div class="mt-3">
+                                        <h4>{{ request.user.first_name }} {{ request.user.last_name }}</h4>
+                                        <p class="text-secondary mb-1">{{ request.user.username }}</p>
+                                        <p class="text-muted font-size-sm">{{ data.phone_no }}</p>
+                                    </div>
+                                {% endif %}
                         </div>
-                    </div>
-                    <div class="card mt-3 p-4">
-                        <h6 class="d-flex align-items-center mb-3 text-center">Notifications</h6>
-                        <ul class="list-group list-group-flush">
-                            {% for i in noti %}
-                            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                                
-                                <span class="text-secondary">Teach request from <u><b>{{i.teach_to}}</b></u> for subject <u><b>{{ i.sub }}</b></u></span>
-                            </li>
-                            {% endfor %}
-                        </ul>
                     </div>
                 </div>
-                <div class="col-md-8">
-                    <div class="card mb-3">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <h6 class="mb-0">Full Name</h6>
-                                </div>
-                                {% for i in data %}
-                                <div class="col-sm-9 text-secondary">
-                                    {{request.user.first_name}} {{request.user.last_name}}
-                                </div>
+                <div class="card mt-3 p-4">
+                    <h6 class="d-flex align-items-center mb-3 text-center">Notifications</h6>
+                    <ul class="list-group list-group-flush">
+                        {% for i in noti %}
+                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+
+                            <span class="text-secondary">Teach request from <u><b>{{i.teach_to}}</b></u> for subject
+                                <u><b>{{ i.sub }}</b></u></span>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Full Name</h6>
                             </div>
-                            <hr>
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <h6 class="mb-0">Email</h6>
-                                </div>
-                                <div class="col-sm-9 text-secondary">
-                                    <a href="/cdn-cgi/l/email-protection">{{request.user.email}}</a>
-                                </div>
+                            
+                            <div class="col-sm-9 text-secondary">
+                                {{request.user.first_name}} {{request.user.last_name}}
                             </div>
-                            <hr>
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <h6 class="mb-0">Phone</h6>
-                                </div>
-                                
-                                <div class="col-sm-9 text-secondary">
-                                    {{i.phone_no}}
-                                </div>
-                                
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Email</h6>
                             </div>
-                            <hr>
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <h6 class="mb-0">Blood Group</h6>
-                                </div>
-                                <div class="col-sm-9 text-secondary">
-                                    {{i.blood_group}}
-                                </div>
+                            <div class="col-sm-9 text-secondary">
+                                <a href="/cdn-cgi/l/email-protection">{{request.user.email}}</a>
                             </div>
-                            {% endfor %}
-                            <hr>
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <a class="btn btn-info " target="__blank"
-                                        href="{% url 'editprofile' %}">Edit</a>
-                                </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Phone</h6>
+                            </div>
+
+                            <div class="col-sm-9 text-secondary">
+                                {{data.phone_no}}
+                            </div>
+
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Blood Group</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                {{data.blood_group}}
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <a class="btn btn-info " target="__blank" href="{% url 'editprofile' %}">Edit</a>
                             </div>
                         </div>
                     </div>
-                    <div class="row gutters-sm">
-                        <div class="col-sm-6 mb-3">
-                            <div class="card h-100">
-                                <div class="card-body">
-                                    <h6 class="d-flex align-items-center mb-3">My Interests</h6>
-                                    {% for i in interest %}
-                                    <small>{{i.Subject}}</small>
-                                    {% if i.Teaching_status == 0 %}
-                                    <a class="btn btn-info float-end "
-                                        href="{% url 'teach_noti' id=i.id %}">TEACH</a>
-                                        {% elif i.Teaching_status == 1 %}
-                                        <a class="btn btn-info float-end "
-                                        href="#">REQUESTED</a>
-                                        {% elif i.Teaching_status == 2 %}
-                                        <a class="btn btn-info float-end "
-                                        href="#">ACCEPTED</a>
-                                        {% endif %}
-                                    <hr>
-                                    {% endfor %}
-                                    <!-- <small>DataBase Management System</small>
+                </div>
+                <div class="row gutters-sm">
+                    <div class="col-sm-6 mb-3">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h6 class="d-flex align-items-center mb-3">My Interests</h6>
+                                {% for i in interest %}
+                                <small>{{i.Subject}}</small>
+                                {% if i.Teaching_status == 0 %}
+                                <a class="btn btn-info float-end " href="{% url 'teach_noti' id=i.id %}">TEACH</a>
+                                {% elif i.Teaching_status == 1 %}
+                                <a class="btn btn-info float-end " href="#">REQUESTED</a>
+                                {% elif i.Teaching_status == 2 %}
+                                <a class="btn btn-info float-end " href="#">ACCEPTED</a>
+                                {% endif %}
+                                <hr>
+                                {% endfor %}
+                                <!-- <small>DataBase Management System</small>
                                     <a class="btn btn-info float-end" target="__blank"
                                         href="">Teach</a>
                                     <hr>
@@ -124,19 +122,19 @@
                                     <a class="btn btn-info float-end" target="__blank"
                                         href="">Teach</a>
                                     <hr> -->
-                                </div>
                             </div>
                         </div>
-                        <div class="col-sm-6 mb-3">
-                            <div class="card h-100">
-                                <div class="align card-body">
-                                    <h6 class="d-flex align-items-center mb-3">I have to Improve</h6>
-                                    {% for k in improvement %}
-                                            <a href="{% url 'lists' sub=k.Learning %}"><small>{{k.Learning}}</small></a><hr>  
-                                    {% endfor %}
-                                    
-                                    
-                                </div>
+                    </div>
+                    <div class="col-sm-6 mb-3">
+                        <div class="card h-100">
+                            <div class="align card-body">
+                                <h6 class="d-flex align-items-center mb-3">I have to Improve</h6>
+                                {% for k in improvement %}
+                                <a href="{% url 'lists' sub=k.Learning %}"><small>{{k.Learning}}</small></a>
+                                <hr>
+                                {% endfor %}
+
+
                             </div>
                         </div>
                     </div>
@@ -144,12 +142,13 @@
             </div>
         </div>
     </div>
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
-    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.bundle.min.js"></script>
-    <script type="text/javascript">
-    </script>
+</div>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.bundle.min.js"></script>
+<script type="text/javascript">
+</script>
 
-    {% endblock content%}
+{% endblock content%}
 <!-- </body>
 </html> -->
