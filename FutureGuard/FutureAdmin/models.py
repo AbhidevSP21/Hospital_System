@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 
 class Doctor(models.Model):
-    user = models.ForeignKey(User,on_delete=models.CASCADE)
+    user = models.ForeignKey(User,on_delete=models.CASCADE,null=True)
     specialization = models.CharField(max_length=100)
     contact = models.CharField(max_length=15)
     email = models.EmailField(unique=True)  # Ensure email is unique

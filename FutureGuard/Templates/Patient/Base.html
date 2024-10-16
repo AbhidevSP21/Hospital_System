@@ -81,7 +81,7 @@
 										<ul class="nav menu">
 											{% if request.user.is_authenticated %}
 											<li><a href="{% url 'userprofile' %}">Profile</a></li>
-											<li><a href="{% url 'doctorlist' %}">Doctors </a></li>
+											<li><a href="{% url 'about' %}">About Us </a></li>
 											<li><a href="#">Services <i class="icofont-rounded-down"></i></a>
 												<ul class="dropdown">
 													<li><a href="{% url 'booking' %}">Book Appointment</a></li>
@@ -95,7 +95,7 @@
 											<li><a href="{% url 'contact' %}">Contact Us</a></li>
 											{% else %}
 											<li><a href="{% url 'index' %}">Home</a></li>
-											<li><a href="{% url 'doctorlist' %}">Doctors </a></li>
+											<li><a href="{% url 'about' %}">About Us </a></li>
 											<li><a href="#">Services <i class="icofont-rounded-down"></i></a>
 												<ul class="dropdown">
 													<li><a href="{% url 'login' %}">Book Appointment</a></li>

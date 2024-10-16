@@ -1,210 +1,154 @@
 {% extends 'Patient/Base.html' %} 
 {% load static %}
 
-
 {% block content %}
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>About Us - Future Guard</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
     <style>
-      body {
-        background-color: #ffffff; /* White background for a clean look */
-        color: #343a40; /* Dark grey text for readability */
-      }
+      /* Common styling for About page and doctor cards */
       
-      .banner-image {
-        width: 100%;
-        height: auto;
-        max-height: 400px; /* Adjust the height as needed */
-        object-fit: cover; /* Ensure the image covers the container without stretching */
-      }
-      
-      .container {
-        max-width: 100%;
-      }
-      
-      .section-header {
-        border-bottom: 2px solid #007bff; /* Blue underline for section headers */
-        padding-bottom: 10px;
-        margin-bottom: 20px;
-      }
-      
-      .social-buttons a {
-        margin-right: 10px;
-        transition: color 0.3s; /* Smooth transition for hover effect */
-      }
-
-      .social-buttons a:hover {
-        color: #0056b3; /* Darker blue color on hover */
-      }
-
-      .btn-primary-custom {
-        background-color: #007bff; /* Custom blue color */
-        border-color: #007bff;
-      }
-
-      .btn-primary-custom:hover {
-        background-color: #0056b3; /* Darker shade on hover */
-        border-color: #004085;
-      }
-      
-      .card-header button {
-        color: #007bff; /* Custom blue color for accordion buttons */
-      }
-      
-      .card-header button.collapsed {
-        color: #0056b3; /* Darker shade when collapsed */
-      }
-
-      .faq-section .card-body {
-        background-color: #f8f9fa; /* Light grey background for FAQ answers */
-      }
-
-      /* New styles */
-      #contact {
-        background-color: #007bff; /* Blue background for contact section */
-        color: #ffffff; /* White text */
-        padding: 20px; /* Add padding for better spacing */
-        border-radius: 5px; /* Rounded corners */
-      }
-
-      #contact p {
-        margin: 0 0 10px; /* Margin for spacing between paragraphs */
-      }
-      
-      #social-media {
-        background-color: #f8f9fa; /* Light grey background for social media section */
-        padding: 20px; /* Add padding for better spacing */
-        border-radius: 5px; /* Rounded corners */
-        text-align: center; /* Center align icons */
-      }
-      
-      .social-buttons i {
-        font-size: 24px; /* Size of social media icons */
-        color: #007bff; /* Blue color for icons */
-        transition: color 0.3s ease, transform 0.3s ease; /* Smooth color and transform transitions */
-      }
-
-      .social-buttons i:hover {
-        color: #0056b3; /* Color on hover */
-        transform: scale(1.2); /* Zoom in effect */
-      }
     </style>
-  </head>
-  <body>
-    <div class="container mt-5">
-      <!-- Introductory Image -->
-      <div class="row mb-5">
-        <div class="col-12">
-          <img src="https://via.placeholder.com/1200x400" alt="Future Guard" class="banner-image" />
-        </div>
+</head>
+<body>
+  <div class="container mt-5">
+    <!-- Introductory Image -->
+    <div class="row mb-5">
+      <div class="col-12">
+        <img src="Static\img\about.webp" alt="Future Guard" class="banner-image" />
       </div>
-
-      <!--<h1 class="text-center mb-4">About Us</h1>-->
-
-      <section id="about">
-        <h2 class="section-header mb-3">About Us</h2>
-        <p>Welcome to FutureGuard: Intelligent Hospital System, a cutting-edge healthcare platform designed to transform the way medical services are delivered. In an era where healthcare systems are burdened with high costs, long wait times, and the challenge of managing complex patient data, FutureGuard offers a revolutionary solution.
-
-          Our mission is to enhance patient care by integrating advanced machine learning technologies with seamless healthcare management. FutureGuard is not just another healthcare platform—it’s a comprehensive system that combines disease prediction, personalized healthcare recommendations, appointment scheduling, and secure electronic medical records management, all in one place.
-
-          At FutureGuard, we believe in proactive healthcare. Our platform leverages machine learning to accurately predict diseases based on individual symptoms and medical history, offering personalized prevention strategies and medication recommendations. Unlike other platforms that cater to single diseases, FutureGuard provides a unified solution to predict and manage multiple conditions, ensuring that our users receive the most holistic and effective care possible.
-
-          Our platform is designed for a diverse user base, including administrators, physicians, and patients. Patients can easily locate and schedule appointments with nearby doctors, reducing wait times and improving accessibility. Automated reminders ensure regular check-ins, contributing to better health outcomes. Administrators benefit from our powerful dashboard, which provides insightful data visualization and analysis tools to support informed decision-making and efficient hospital management.
-
-          Security and privacy are at the core of FutureGuard. Our secure database ensures that electronic medical records are stored safely, providing patients and healthcare providers with easy and secure access to critical information.
-
-          We are dedicated to pushing the boundaries of traditional healthcare systems and creating a more efficient, patient-centric future. Join us on this journey to revolutionize healthcare delivery with FutureGuard.</p>
-      </section>
-
-      <section id="team" class="mt-5">
-        <h2 class="section-header">Meet Our Team</h2>
-        <div class="row">
-          <div class="col-md-4 text-center">
-            <img src="team-member1.jpg" alt="Team Member 1" class="img-fluid rounded-circle" />
-            <h3>John Doe</h3>
-            <p>Co-Founder & CEO</p>
-          </div>
-          <div class="col-md-4 text-center">
-            <img src="team-member2.jpg" alt="Team Member 2" class="img-fluid rounded-circle" />
-            <h3>Jane Smith</h3>
-            <p>Co-Founder & CTO</p>
-          </div>
-          <div class="col-md-4 text-center">
-            <img src="team-member3.jpg" alt="Team Member 3" class="img-fluid rounded-circle" />
-            <h3>Emily Johnson</h3>
-            <p>Co-Founder & COO</p>
-          </div>
-        </div>
-      </section>
-      
-      <section id="our-story" class="mt-5">
-        <h2 class="section-header mb-3">Our Story</h2>
-        <p>FutureGuard was born from our collective experience and observations in the healthcare sector. As a team of three passionate individuals, we noticed a recurring issue in hospitals—long wait times and inefficiencies in patient scheduling. These delays not only caused frustration for patients but also put additional strain on healthcare providers. We knew there had to be a better way to manage this crucial aspect of healthcare delivery.
-
-          Driven by a shared vision to make healthcare more efficient and patient-friendly, we embarked on a mission to create a solution that would address these challenges head-on. We envisioned a web app that could intelligently schedule patients based on doctors' availability, thereby reducing wait times and optimizing the use of medical resources. Our goal was simple: to create a system that saves time for both patients and healthcare providers, ultimately improving the overall healthcare experience.
-
-          Through dedication, innovation, and a deep understanding of the needs within the healthcare industry, we developed FutureGuard. This platform is designed not only to streamline patient scheduling but also to provide comprehensive healthcare solutions that cater to the needs of administrators, physicians, and patients alike. Our story is one of collaboration, problem-solving, and a commitment to making a positive impact on the healthcare system.</p>
-      </section>
-
-      <section id="our-vision" class="mt-5">
-        <h2 class="section-header mb-3">Our Vision for Tomorrow</h2>
-        <p>At FutureGuard, our vision extends beyond solving today’s healthcare challenges. We are committed to continuously pushing the boundaries of what’s possible in healthcare delivery. As we look to the future, our goal is to expand the capabilities of FutureGuard, integrating even more advanced machine learning technologies and innovative solutions to stay ahead of emerging healthcare needs. We envision a world where healthcare is not only more efficient but also more predictive and personalized. By harnessing the power of data and technology, FutureGuard aims to create a healthcare system that anticipates patient needs, reduces burdens on providers, and ultimately delivers better health outcomes for all. Our journey is just beginning, and we are excited to lead the way in transforming healthcare for the future.</p>
-      </section>
-
-      <section id="contact" class="mt-5" style="color: #fff">
-        <h2 class="section-header mb-3">Contact Details</h2>
-        <p>We are here to support you on your healthcare journey. Feel free to reach out to us:</p>
-        <p>
-          <strong>Email:</strong> support@futureguard.com
-        </p>
-        <p>
-          <strong>Phone:</strong> +1-234-567-8901
-        </p>
-        <p>
-          <strong>Address:</strong> 123 Health Street, Wellness City, HC 45678
-        </p>
-      </section>
-
-      <section id="social-media" class="mt-5">
-        <h2 class="section-header mb-3">Follow Us</h2>
-        <div id="social-media" class="social-buttons">
-          <a href="https://facebook.com/futureguard" target="_blank" class="btn">
-            <i class="fab fa-facebook-f"></i>
-          </a>
-          <a href="https://twitter.com/futureguard" target="_blank" class="btn">
-            <i class="fab fa-twitter"></i>
-          </a>
-          <a href="https://linkedin.com/company/futureguard" target="_blank" class="btn">
-            <i class="fab fa-linkedin-in"></i>
-          </a>
-        </div>
-      </section>
-
-      <section id="faq" class="mt-5 mb-5">
-        <h2 class="section-header mb-3">Frequently Asked Questions</h2>
-        <div class="accordion" id="faqAccordion">
-          <div class="card">
-            <div class="card-header" id="headingOne">
-              <h5 class="mb-0">
-                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                  What is FutureGuard?
-                </button>
-              </h5>
-            </div>
-
-            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#faqAccordion">
-              <div class="card-body">
-                FutureGuard is an advanced web-based platform designed to improve healthcare delivery through disease prediction, personalized healthcare recommendations, appointment scheduling, and secure electronic medical records management.
-              </div>
-            </div>
-          </div>
-          <!-- Additional FAQ items can go here -->
-        </div>
-      </section>
     </div>
-    {% endblock content %}
 
+    <!-- About Us Section -->
+    <section id="about">
+      <h2 class="section-header mb-3">About Us</h2>
+      <p>Welcome to FutureGuard: Intelligent Hospital System, a cutting-edge healthcare platform designed to transform the way medical services are delivered. In an era where healthcare systems are burdened with high costs, long wait times, and the challenge of managing complex patient data, FutureGuard offers a revolutionary solution.
+
+        Our mission is to enhance patient care by integrating advanced machine learning technologies with seamless healthcare management. FutureGuard is not just another healthcare platform—it’s a comprehensive system that combines disease prediction, personalized healthcare recommendations, appointment scheduling, and secure electronic medical records management, all in one place.
+
+        At FutureGuard, we believe in proactive healthcare. Our platform leverages machine learning to accurately predict diseases based on individual symptoms and medical history, offering personalized prevention strategies and medication recommendations. Unlike other platforms that cater to single diseases, FutureGuard provides a unified solution to predict and manage multiple conditions, ensuring that our users receive the most holistic and effective care possible.
+
+        Our platform is designed for a diverse user base, including administrators, physicians, and patients. Patients can easily locate and schedule appointments with nearby doctors, reducing wait times and improving accessibility. Automated reminders ensure regular check-ins, contributing to better health outcomes. Administrators benefit from our powerful dashboard, which provides insightful data visualization and analysis tools to support informed decision-making and efficient hospital management.
+
+        Security and privacy are at the core of FutureGuard. Our secure database ensures that electronic medical records are stored safely, providing patients and healthcare providers with easy and secure access to critical information.
+
+        We are dedicated to pushing the boundaries of traditional healthcare systems and creating a more efficient, patient-centric future. Join us on this journey to revolutionize healthcare delivery with FutureGuard.</p>
+    </section>
+
+    <!-- New Doctor Directory Section -->
+    <section id="doctor-directory" class="mt-5">
+      <h2 class="section-header mb-3">Doctor Directory</h2>
+      <div class="row">
+        <div class="col-md-4 mb-4">
+          <div class="card h-100">
+            <img src="https://via.placeholder.com/100" class="card-img-top mx-auto mt-4" alt="Doctor Photo" />
+            <div class="card-body">
+              <h5 class="card-title">Dr. John Doe</h5>
+              <p class="card-text">
+                <strong>Specialization:</strong> Cardiology
+              </p>
+              <p class="card-text">
+                <strong>Experience:</strong> 15 years
+              </p>
+              <p class="card-text">
+                <strong>Contact:</strong> johndoe@example.com
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-4">
+          <div class="card h-100">
+            <img src="https://via.placeholder.com/100" class="card-img-top mx-auto mt-4" alt="Doctor Photo" />
+            <div class="card-body">
+              <h5 class="card-title">Dr. Jane Smith</h5>
+              <p class="card-text">
+                <strong>Specialization:</strong> Neurology
+              </p>
+              <p class="card-text">
+                <strong>Experience:</strong> 10 years
+              </p>
+              <p class="card-text">
+                <strong>Contact:</strong> janesmith@example.com
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-4">
+          <div class="card h-100">
+            <img src="https://via.placeholder.com/100" class="card-img-top mx-auto mt-4" alt="Doctor Photo" />
+            <div class="card-body">
+              <h5 class="card-title">Dr. Jane Smith</h5>
+              <p class="card-text">
+                <strong>Specialization:</strong> Neurology
+              </p>
+              <p class="card-text">
+                <strong>Experience:</strong> 10 years
+              </p>
+              <p class="card-text">
+                <strong>Contact:</strong> janesmith@example.com
+              </p>
+            </div>
+          </div>
+        </div>
+        <!-- Add remaining doctor cards here -->
+      </div>
+    </section>
+
+    <!-- Existing Sections -->
+    <section id="our-story" class="mt-5">
+      <h2 class="section-header mb-3">Our Story</h2>
+      <p>FutureGuard was born from our collective experience and observations in the healthcare sector. As a team of three passionate individuals, we noticed a recurring issue in hospitals—long wait times and inefficiencies in patient scheduling. These delays not only caused frustration for patients but also put additional strain on healthcare providers. We knew there had to be a better way to manage this crucial aspect of healthcare delivery.
+
+        Driven by a shared vision to make healthcare more efficient and patient-friendly, we embarked on a mission to create a solution that would address these challenges head-on. We envisioned a web app that could intelligently schedule patients based on doctors' availability, thereby reducing wait times and optimizing the use of medical resources. Our goal was simple: to create a system that saves time for both patients and healthcare providers, ultimately improving the overall healthcare experience.
+
+        Through dedication, innovation, and a deep understanding of the needs within the healthcare industry, we developed FutureGuard. This platform is designed not only to streamline patient scheduling but also to provide comprehensive healthcare solutions that cater to the needs of administrators, physicians, and patients alike. Our story is one of collaboration, problem-solving, and a commitment to making a positive impact on the healthcare system.</p>
+    </section>
+
+    <section id="our-vision" class="mt-5">
+      <h2 class="section-header mb-3">Our Vision for Tomorrow</h2>
+      <p>At FutureGuard, our vision extends beyond solving today’s healthcare challenges. We are committed to continuously pushing the boundaries of what’s possible in healthcare delivery. As we look to the future, our goal is to expand the capabilities of FutureGuard, integrating even more advanced machine learning technologies and innovative solutions to stay ahead of emerging healthcare needs. We envision a world where healthcare is not only more efficient but also more predictive and personalized. By harnessing the power of data and technology, FutureGuard aims to create a healthcare system that anticipates patient needs, reduces burdens on providers, and ultimately delivers better health outcomes for all. Our journey is just beginning, and we are excited to lead the way in transforming healthcare for the future.</p>
+    </section>
+
+    <!-- Contact and Social Media -->
+    <section id="contact" class="mt-5" style="color: #fff">
+      <h2 class="section-header mb-3">Contact Details</h2>
+      <p>We are here to support you on your healthcare journey. Feel free to reach out to us:</p>
+      <p><strong>Email:</strong> support@futureguard.com</p>
+      <p><strong>Phone:</strong> +1-234-567-8901</p>
+      <p><strong>Address:</strong> 123 Health Street, Wellness City, HC 45678</p>
+    </section>
+
+    <section id="social-media" class="mt-5">
+      <h2 class="section-header mb-3">Follow Us</h2>
+      <div class="social-buttons">
+        <a href="https://facebook.com/futureguard" target="_blank" class="btn"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://twitter.com/futureguard" target="_blank" class="btn"><i class="fab fa-twitter"></i></a>
+        <a href="https://linkedin.com/company/futureguard" target="_blank" class="btn"><i class="fab fa-linkedin-in"></i></a>
+      </div>
+    </section>
+
+    <section id="faq" class="mt-5 mb-5">
+      <h2 class="section-header mb-3">Frequently Asked Questions</h2>
+      <div class="accordion" id="faqAccordion">
+        <div class="card">
+          <div class="card-header" id="headingOne">
+            <h5 class="mb-0">
+              <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                What is FutureGuard?
+              </button>
+            </h5>
+          </div>
+          <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#faqAccordion">
+            <div class="card-body">
+              FutureGuard is an advanced web-based platform designed to improve healthcare delivery...
+            </div>
+          </div>
+        </div>
+        <!-- Additional FAQ items -->
+      </div>
+    </section>
+  </div>
+{% endblock content %}
