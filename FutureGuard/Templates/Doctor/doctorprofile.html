@@ -1,15 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Doctor Profile</title>
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-    <link href="doctorhome.css" rel="stylesheet">
-</head>
-<body>
+{% extends 'Doctor\Base1.html' %}
 
+{% block content %}
 <section id="content" class="container">
     <!-- Begin .page-heading -->
     <div class="page-heading">
@@ -20,9 +11,11 @@
                 </a>
             </div>                      
             <div class="media-body va-m">
-                <h2 class="media-heading">Dr. Michael Halls
-                    <small> - Cardiologist</small>
+                {% for i in data %}
+                <h2 class="media-heading">Dr. {{ request.user.first_name }} {{ request.user.last_name }}
+                    <small> - {{i.specialization}}</small>
                 </h2>
+                {% endfor %}
                 <p class="lead">Experienced in treating cardiovascular diseases with over 10 years of practice in top hospitals.</p>
                 <div class="media-links">
                     <ul class="list-inline list-unstyled">
@@ -159,7 +152,7 @@
                                 </tr>
                             </tbody>
                         </table>
-                        <button class="btn btn-primary">View All Appointments</button>
+                        <button class="btn btn-primary"><a href="{% url 'viewappoint' %}">View All Appointments</a></button>
                     </div>
 
                     <!-- Patient Information Tab -->
@@ -223,9 +216,4 @@
         </div> <!-- end col-md-8 -->
     </div> <!-- end row -->
 </section>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-</body>
-</html>
+{% endblock content %}

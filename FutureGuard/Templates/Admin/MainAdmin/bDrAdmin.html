@@ -57,10 +57,26 @@
               <label for="doctorName" class="form-label">Doctor's Name</label>
               <input type="text" class="form-control" id="doctorName" name="doctorName" required />
             </div>
-            <div class="mb-3">
-              <label for="specialization" class="form-label">Specialization</label>
-              <input type="text" class="form-control" id="specialization" name="specialization" required />
-            </div>
+            <div class="mb-4">
+              <label for="specialization" class="form-label fs-5">Select Service:</label>
+              <select id="specialization" class="form-select fs-4" name="specialization" required>
+                  <option value="" disabled selected>Select a Department</option>
+                  <option value="Dermatology">Dermatology (Skin)</option>
+                  <option value="Allergy and Immunology">Allergy and Immunology</option>
+                  <option value="Gastroenterology">Gastroenterology (Digestive System)</option>
+                  <option value="Endocrinology">Endocrinology (Hormones)</option>
+                  <option value="Pulmonology">Pulmonology (Respiratory System)</option>
+                  <option value="Cardiology">Cardiology (Heart)</option>
+                  <option value="Neurology">Neurology (Nervous System)</option>
+                  <option value="Infectious Disease">Infectious Disease</option>
+                  <option value="Hematology">Hematology (Blood Disorders)</option>
+                  <option value="Hepatology">Hepatology (Liver)</option>
+                  <option value="Orthopedics">Orthopedics (Bones and Muscles)</option>
+                  <option value="Urology">Urology</option>
+                  <option value="Proctology">Proctology (Anal and Rectal Diseases)</option>
+                  <option value="Vascular Surgery">Vascular Surgery</option>
+              </select>
+          </div>
             <div class="mb-3">
               <label for="contact" class="form-label">Contact</label>
               <input type="text" class="form-control" id="contact" name="contact" required />
@@ -95,10 +111,7 @@
               <label for="editDoctorName" class="form-label">Doctor's Name</label>
               <input type="text" class="form-control" id="editDoctorName" name="doctorName" required />
             </div>
-            <div class="mb-3">
-              <label for="editSpecialization" class="form-label">Specialization</label>
-              <input type="text" class="form-control" id="editSpecialization" name="specialization" required />
-            </div>
+            
             <div class="mb-3">
               <label for="editContact" class="form-label">Contact</label>
               <input type="text" class="form-control" id="editContact" name="contact" required />

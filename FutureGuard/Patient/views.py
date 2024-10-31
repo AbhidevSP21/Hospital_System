@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.models import User
-from .models import PatientProfile, feedback
+from .models import PatientProfile, feedback, Prediction
 from django.contrib.auth.hashers import make_password
 import csv
 from django.conf import settings
@@ -51,7 +51,7 @@ def profileupdate(request):
             profile.emergency_contact = emergency_contact
         if profile_picture:
             profile.profile_picture = profile_picture
-            print(profile.profile_picture)
+            # print(profile.profile_picture)
         if medical_report:
             profile.medical_report = medical_report
 
@@ -189,16 +189,10 @@ def about(request) :
     return render(request, "Patient/Main/about.html",context={})
 
 def userprofile(request) :
-<<<<<<< HEAD
-    usr = request.user
-    data = PatientProfile.objects.get(user_id = usr.id)
-    return render(request, "Patient/Main/userprofile.html",{'data':data})
-=======
     data = PatientProfile.objects.filter(user_id = request.user)
     appoint = Appointment.objects.filter(user_id = request.user).order_by('-day')[:5]
     prediction = Prediction.objects.filter(user_id = request.user)
     return render(request, "Patient/Main/userprofile.html",{'data':data,'appoint':appoint, 'prediction':prediction})
->>>>>>> 9e565b8648ba20e414ed1b826d698fac1f8b3833
 
 def prediction(request):
 

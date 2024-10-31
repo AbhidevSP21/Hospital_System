@@ -1,0 +1,36 @@
+{% extends 'Doctor\Base1.html' %}
+
+{% block content %}
+
+    <h1>Patient Appointments</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Patient Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Doctor</th>
+                <th>Date</th>
+                <th>Reason</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for appointment in appointments %}
+            <tr>
+                <td>{{ appointment.user.first_name }} {{ appointment.user.last_name }}</td>
+                <td>{{ appointment.user.email }}</td>
+                <td>{{ appointment.service }}</td>
+                <td>{{ appointment.doctor_category }}</td>
+                <td>{{ appointment.day }}</td>
+                <td>{{ appointment.time }}</td>
+                <td>{{ appointment.status|yesno:"Confirmed,Pending" }}</td>
+            </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="6">No appointments available.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    {% endblock content %}

@@ -74,11 +74,6 @@ class Appointment(models.Model):
     day = models.DateField(default=datetime.now)
     time = models.CharField(max_length=10, choices=TIME_CHOICES, default="3 PM")
     time_ordered = models.DateTimeField(default=datetime.now, blank=True)
-<<<<<<< HEAD
-
-    def __str__(self):
-        return f"{self.user.username} | Service: {self.service} | Category: {self.doctor_category} | Day: {self.day} | Time: {self.time}"
-=======
     status = models.BooleanField(default=False)
     def __str__(self):
         return f"{self.user.username} | day: {self.day} | time: {self.time}"
@@ -93,4 +88,3 @@ class Prediction(models.Model):
 
     def __str__(self):
         return f"Prediction for {self.predicted_disease} on {self.created_at}"
->>>>>>> 9e565b8648ba20e414ed1b826d698fac1f8b3833
