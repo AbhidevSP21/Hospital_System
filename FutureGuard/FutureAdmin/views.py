@@ -56,6 +56,18 @@ def edit_doctor(request, doctor_id):
         doctor.specialization = request.POST.get('specialization')  # Update specialization
         doctor.contact = request.POST.get('contact')  # Update contact
         doctor.save()  # Save changes to the database
+        
+        #--------------------
+        # Update user fields
+        doctor.user.first_name = name
+        doctor.user.email = email
+        doctor.user.save()  # Save the user instance
+        
+        # Update Doctor model fields
+        doctor.specialization = specialization
+        doctor.contact = contact
+        doctor.save()  # Save the doctor instance
+        #---------------------
 
         return redirect(admindoctors)  # Redirect to the doctor page after saving
 
