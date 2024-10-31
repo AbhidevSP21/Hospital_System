@@ -51,7 +51,7 @@ def profileupdate(request):
             profile.emergency_contact = emergency_contact
         if profile_picture:
             profile.profile_picture = profile_picture
-            print(profile.profile_picture)
+            # print(profile.profile_picture)
         if medical_report:
             profile.medical_report = medical_report
 

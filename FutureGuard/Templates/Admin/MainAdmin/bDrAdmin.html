@@ -92,10 +92,26 @@
               <label for="doctorName" class="form-label">Doctor's Name</label>
               <input type="text" class="form-control" id="doctorName" name="doctorName" required />
             </div>
-            <div class="mb-3">
-              <label for="specialization" class="form-label">Specialization</label>
-              <input type="text" class="form-control" id="specialization" name="specialization" required />
-            </div>
+            <div class="mb-4">
+              <label for="specialization" class="form-label fs-5">Select Service:</label>
+              <select id="specialization" class="form-select fs-4" name="specialization" required>
+                  <option value="" disabled selected>Select a Department</option>
+                  <option value="Dermatology">Dermatology (Skin)</option>
+                  <option value="Allergy and Immunology">Allergy and Immunology</option>
+                  <option value="Gastroenterology">Gastroenterology (Digestive System)</option>
+                  <option value="Endocrinology">Endocrinology (Hormones)</option>
+                  <option value="Pulmonology">Pulmonology (Respiratory System)</option>
+                  <option value="Cardiology">Cardiology (Heart)</option>
+                  <option value="Neurology">Neurology (Nervous System)</option>
+                  <option value="Infectious Disease">Infectious Disease</option>
+                  <option value="Hematology">Hematology (Blood Disorders)</option>
+                  <option value="Hepatology">Hepatology (Liver)</option>
+                  <option value="Orthopedics">Orthopedics (Bones and Muscles)</option>
+                  <option value="Urology">Urology</option>
+                  <option value="Proctology">Proctology (Anal and Rectal Diseases)</option>
+                  <option value="Vascular Surgery">Vascular Surgery</option>
+              </select>
+          </div>
             <div class="mb-3">
               <label for="contact" class="form-label">Contact</label>
               <input type="text" class="form-control" id="contact" name="contact" required />
@@ -110,6 +126,33 @@
               <input type="password" class="form-control" id="password" name="password" required />
             </div>
             <button type="submit" class="btn btn-primary">Add Doctor</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Edit Doctor Modal -->
+  <div class="modal fade" id="editDoctorModal" tabindex="-1" aria-labelledby="editDoctorModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editDoctorModalLabel">Edit Doctor</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form method="POST" id="editDoctorForm">
+            {% csrf_token %}
+            <div class="mb-3">
+              <label for="editDoctorName" class="form-label">Doctor's Name</label>
+              <input type="text" class="form-control" id="editDoctorName" name="doctorName" required />
+            </div>
+            
+            <div class="mb-3">
+              <label for="editContact" class="form-label">Contact</label>
+              <input type="text" class="form-control" id="editContact" name="contact" required />
+            </div>
+            <button type="submit" class="btn btn-primary">Update Doctor</button>
           </form>
         </div>
       </div>
