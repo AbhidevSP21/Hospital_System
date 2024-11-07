@@ -7,8 +7,10 @@
     <!-- Doctors Table -->
     <div class="table-responsive">
       <div class="mb-3 text-end">
+        <!-- Add Doctor Button to Open the Modal -->
         <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addDoctorModal">Add Doctor</button>
       </div>
+
       <table class="table table-striped table-hover">
         <thead>
           <tr>
@@ -16,11 +18,11 @@
             <th>Name</th>
             <th>Specialization</th>
             <th>Contact</th>
+            <th>Email</th>
             <th>Action</th>
           </tr>
         </thead>
         <tbody>
-          <!-- Example doctor entry -->
           {% for d in doctors %}
             <tr>
               <td>{{ forloop.counter }}</td>
@@ -29,20 +31,53 @@
               <td>{{ d.contact }}</td>
               <td>{{ d.email }}</td>
               <td>
-                {% comment %}
-                <button class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editDoctorModal" onclick="populateEditModal({{ d.id }}, '{{ d.name }}', '{{ d.specialization }}', '{{ d.contact }}', '{{ d.email }}')">Edit</button>
-                {% endcomment %}
-                <button class="btn btn-danger btn-sm" onclick="alert('Do you want to delete this Doctor?')"><a style="color:white; text-decoration: none;" href="{% url 'delete_doctor' doctor_id=d.id %}">Delete</a></button>
+                <!-- Edit button to open the modal for each doctor -->
+                <button class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editDoctorModal{{ d.id }}">Edit</button>
+                <button class="btn btn-danger btn-sm"><a style="color:white; text-decoration: none;" href="{% url 'delete_doctor' doctor_id=d.id %}">Delete</a></button>
               </td>
             </tr>
+
+            <!-- Edit Doctor Modal for each doctor -->
+            <div class="modal fade" id="editDoctorModal{{ d.id }}" tabindex="-1" aria-labelledby="editDoctorModalLabel{{ d.id }}" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="editDoctorModalLabel{{ d.id }}">Edit Doctor</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <form method="POST" action="{% url 'edit_doctor' d.id %}">
+                      {% csrf_token %}
+                      <div class="mb-3">
+                        <label for="editDoctorName{{ d.id }}" class="form-label">Doctor's Name</label>
+                        <input type="text" class="form-control" id="editDoctorName{{ d.id }}" name="doctorName" value="{{ d.user.first_name }}" required />
+                      </div>
+                      <div class="mb-3">
+                        <label for="editSpecialization{{ d.id }}" class="form-label">Specialization</label>
+                        <input type="text" class="form-control" id="editSpecialization{{ d.id }}" name="specialization" value="{{ d.specialization }}" required />
+                      </div>
+                      <div class="mb-3">
+                        <label for="editContact{{ d.id }}" class="form-label">Contact</label>
+                        <input type="text" class="form-control" id="editContact{{ d.id }}" name="contact" value="{{ d.contact }}" required />
+                      </div>
+                      <div class="mb-3">
+                        <label for="editEmail{{ d.id }}" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="editEmail{{ d.id }}" name="email" value="{{ d.email }}" required />
+                      </div>
+                      <button type="submit" class="btn btn-primary">Update Doctor</button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
           {% endfor %}
-          <!-- Add more doctor entries here -->
         </tbody>
       </table>
     </div>
   </div>
 
-  <!-- Add Doctor Modal -->
+  <!-- Add Doctor Modal (standalone, not inside main content or table) -->
+  <!-- Add Doctor Modal (standalone) -->
   <div class="modal fade" id="addDoctorModal" tabindex="-1" aria-labelledby="addDoctorModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -85,6 +120,7 @@
               <label for="email" class="form-label">Email</label>
               <input type="email" class="form-control" id="email" name="email" required />
             </div>
+            <!-- Password Field -->
             <div class="mb-3">
               <label for="password" class="form-label">Password</label>
               <input type="password" class="form-control" id="password" name="password" required />
