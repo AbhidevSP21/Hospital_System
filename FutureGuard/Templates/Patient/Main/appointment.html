@@ -35,23 +35,7 @@
             <!-- Select Day -->
             <div class="mb-4">
                 <label for="day" class="form-label fs-5">Select Day:</label>
-                <select id="day" class="form-select fs-4" name="day" required>
-                    <option value="" disabled selected>Select the Day</option>
-                    {% for validateWeekday in validateWeekdays %}
-                    <option value="{{validateWeekday}}">{{validateWeekday}}</option>
-                    {% endfor %}
-                </select>
-            </div>
-
-            <!-- Select Time -->
-            <div class="mb-4">
-                <label for="time" class="form-label fs-5">Time:</label>
-                <select id="time" class="form-select fs-4" name="time" required>
-                    <option value="" disabled selected>Select the time</option>
-                    {% for time in times %}
-                    <option value="{{time}}">{{time}}</option>
-                    {% endfor %}
-                </select>
+                <input id="day" class="form-control fs-4" name="day" type="datetime-local" required>
             </div>
 
             <!-- Submit Button -->

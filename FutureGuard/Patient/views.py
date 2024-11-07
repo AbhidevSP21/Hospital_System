@@ -109,77 +109,24 @@ from datetime import datetime, timedelta
 from .models import Appointment  # Make sure to import your Appointment model
 
 def booking(request):
-    user = request.user
-    weekdays = validWeekday(22)  # Loop for the next 21 days
-    validateWeekdays = isWeekdayValid(weekdays)  # Show only available days
-
-    times = [
-        "3 PM", "3:30 PM", "4 PM", "4:30 PM", "5 PM", "5:30 PM", "6 PM", "6:30 PM", "7 PM", "7:30 PM"
-    ]
-    today = datetime.now()
-    minDate = today.strftime('%Y-%m-%d')
-    deltatime = today + timedelta(days=21)
-    maxDate = deltatime.strftime('%Y-%m-%d')
-
-    # Initialize the session variables
-    day = request.session.get('day')
-    service = request.session.get('service')
 
     if request.method == 'POST':
-        # First step: Selecting service and day
-        if not service or not day:
-            service = request.POST.get('service')
-            day = request.POST.get('day')
-            if not service:
-                messages.error(request, "Please Select A Service!")
-                return redirect('booking')
 
-            # Store day and service in django session for confirmation step
-            request.session['day'] = day
-            request.session['service'] = service
 
-        # Second step: Selecting time and confirming appointment
-        else:
-            time = request.POST.get("time")
-            date = dayToWeekday(day)
+        service = request.POST['service']
+        user = request.user
+        date = request.POST['day']
 
-            if service:
-                if minDate <= day <= maxDate:
-                    if date in ['Monday', 'Saturday', 'Wednesday']:
-                        if Appointment.objects.filter(day=day).count() < 11:
-                            if Appointment.objects.filter(day=day, time=time).count() < 1:
-                                Appointment.objects.create(
+        appoinment=Appointment(
                                     user=user,
                                     service=service,
-                                    day=day,
-                                    time=time,
-                                )
-                                messages.success(request, "Appointment Saved!")
-                                
-                                # Clear session data after successful booking
-                                del request.session['day']
-                                del request.session['service']
-
-                                return redirect('userprofile')
-                            else:
-                                messages.error(request, "The Selected Time Has Been Reserved Before!")
-                        else:
-                            messages.error(request, "The Selected Day Is Full!")
-                    else:
-                        messages.error(request, "The Selected Date Is Incorrect")
-                else:
-                    messages.error(request, "The Selected Date Isn't In The Correct Time Period!")
-            else:
-                messages.error(request, "Please Select A Service!")
-
-    # Ensure the times list is always passed to the template
-    hour = checkTime(times, day) if day else times
-    return render(request, 'Patient/Main/appointment.html', {
-        'weekdays': weekdays,
-        'validateWeekdays': validateWeekdays,
-        'times': hour,  # Pass the adjusted times list to the template
-        'current_service': service,  # Pass the current service to the template
-    })
+                                    day=date
+                            )
+        appoinment.save()
+        messages.success(request, "Appointment Saved!")
+        return redirect('userprofile')
+    else:
+        return render(request, 'Patient/Main/appointment.html', context={})
 
 
 
@@ -192,7 +139,9 @@ def userprofile(request) :
     data = PatientProfile.objects.filter(user_id = request.user)
     appoint = Appointment.objects.filter(user_id = request.user).order_by('-day')[:5]
     prediction = Prediction.objects.filter(user_id = request.user)
-    return render(request, "Patient/Main/userprofile.html",{'data':data,'appoint':appoint, 'prediction':prediction})
+    context={'data':data,'appoint':appoint, 'prediction':prediction}
+    # print(context)
+    return render(request, "Patient/Main/userprofile.html",context=context)
 
 def prediction(request):
 
