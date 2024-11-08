@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from datetime import datetime
-
+from FutureAdmin.models import Doctor
 
 
 # Create your models here.
@@ -34,6 +34,8 @@ class feedback(models.Model):
     email=models.CharField(max_length=100)
     rating=models.IntegerField(null=False)
     feedback=models.CharField(max_length=1000,null=True)
+
+
 
 SERVICE_CHOICES = (
     ("Doctor care", "Doctor care"),
@@ -69,8 +71,8 @@ DOCTOR_CATEGORY_CHOICES = (
 
 class Appointment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
-    service = models.CharField(max_length=50, choices=SERVICE_CHOICES, default="Doctor care")
-    doctor_category = models.CharField(max_length=50, choices=DOCTOR_CATEGORY_CHOICES, default="General Physician")
+    service = models.CharField(max_length=50, default="Doctor care")
+    doctor = models.ForeignKey(Doctor,on_delete=models.CASCADE, null=True, blank=True)
     day = models.DateTimeField(default=datetime.now)
     booking_date = models.DateTimeField(default=datetime.now)
     status = models.BooleanField(default=False)
@@ -85,3 +87,10 @@ class Prediction(models.Model):
 
     def __str__(self):
         return f"Prediction for {self.predicted_disease} on {self.created_at}"
+
+class Disease(models.Model):
+    disease_name = models.CharField(max_length=255,null=True)
+    department = models.CharField(max_length=255)
+
+    def __str__(self):
+        return f"{self.disease_name} - {self.department}"

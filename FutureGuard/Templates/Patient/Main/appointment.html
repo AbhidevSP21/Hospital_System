@@ -1,4 +1,3 @@
-<title>Online Booking</title>
 {% extends 'Patient/Base.html' %}
 {% load static %}
 {% block content %}
@@ -7,10 +6,10 @@
     <h1 class="text-center mt-3">Online Booking</h1>
 
     <div class="shadow p-4 mb-5 bg-body rounded text-black">
-        <form method="post" action="{% url 'booking' %}" class="me-2 ms-2" required>
+        <form method="post" action="{% url 'booking' %}" class="me-2 ms-2">
             {% csrf_token %}
 
-            <!-- Select Service -->
+            <!-- Select Service (Specialization) -->
             <div class="mb-4">
                 <label for="service" class="form-label fs-5">Select Service:</label>
                 <select id="service" class="form-select fs-4" name="service" required>
@@ -31,6 +30,8 @@
                     <option value="Vascular Surgery">Vascular Surgery</option>
                 </select>
             </div>
+
+            
 
             <!-- Select Day -->
             <div class="mb-4">

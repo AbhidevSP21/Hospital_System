@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.models import User
 from django.contrib.auth.hashers import make_password
+from django.contrib import messages
+from django.http import JsonResponse
 from .models import Doctor
 
 # Admin Dashboard View
@@ -46,6 +48,13 @@ def add_doctor(request):
         contact = request.POST.get('contact')
         email = request.POST.get('email')
         password = request.POST.get('password')
+        qualification = request.POST.get('qualification')
+        profile_picture = request.FILES.get('profile_picture')
+
+        # Check if email already exists
+        if User.objects.filter(username=email).exists():
+            messages.error(request, "A doctor with this email already exists.")
+            return redirect('admindoctors')
 
         # Create and hash the password
         hashed_password = make_password(password)
@@ -63,13 +72,16 @@ def add_doctor(request):
         doctor = Doctor.objects.create(
             user=user,
             specialization=specialization,
+            qualification=qualification,
             contact=contact,
-            email=email
+            email=email,
+            profile_picture=profile_picture
         )
-
+        doctor.save()
+        messages.success(request, "Doctor added successfully.")
         return redirect('admindoctors')  # Redirect to the doctors page
 
-    return render(request, 'Admin/MainAdmin/bDrAdmin.html')
+    return render(request, 'Admin/MainAdmin/addDoctor.html')  # Render add doctor form
 
 # Edit Doctor View
 def edit_doctor(request, doctor_id):
@@ -83,6 +95,7 @@ def edit_doctor(request, doctor_id):
         doctor.user.save()  # Save changes to User model
         doctor.save()  # Save changes to Doctor model
 
+        messages.success(request, "Doctor details updated successfully.")
         return redirect('admindoctors')  # Redirect to doctors page
 
     context = {'doctor': doctor}
@@ -94,4 +107,7 @@ def delete_doctor(request, doctor_id):
     doctor.user.delete()  # Delete associated user
     doctor.delete()  # Delete the doctor
 
+    messages.success(request, "Doctor deleted successfully.")
     return redirect('admindoctors')  # Redirect to doctors page
+
+

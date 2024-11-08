@@ -16,6 +16,7 @@
           <tr>
             <th>SNo.</th>
             <th>Name</th>
+            <th>Profile Picture</th>
             <th>Specialization</th>
             <th>Contact</th>
             <th>Email</th>
@@ -27,6 +28,7 @@
             <tr>
               <td>{{ forloop.counter }}</td>
               <td>{{ d.user.first_name }}</td>
+              <td>{{ d.profile_picture }}</td>
               <td>{{ d.specialization }}</td>
               <td>{{ d.contact }}</td>
               <td>{{ d.email }}</td>
@@ -86,13 +88,40 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form method="POST" action="{% url 'add_doctor' %}">
+          <form method="POST" action="{% url 'add_doctor' %}" enctype="multipart/form-data">
             {% csrf_token %}
             <div class="mb-3">
               <label for="doctorName" class="form-label">Doctor's Name</label>
               <input type="text" class="form-control" id="doctorName" name="doctorName" required />
             </div>
-            <div class="mb-4">
+            <div class="md-6">
+              <label for="profile_picture" class="form-label">Profile Picture</label>
+              <input class="form-control" type="file" id="profile_picture" name="profile_picture">
+            </div>
+            <br>
+            <div class="mb-6">
+              <label for="qualification" class="form-label fs-5">Select Qualification:</label>
+              <select id="qualification" class="form-select fs-4" name="qualification" required>
+                  <option value="" disabled selected>Select a Qualification</option>
+                  <option value="MBBS">MBBS</option>
+                  <option value="MD">MD (Doctor of Medicine)</option>
+                  <option value="DO">DO (Doctor of Osteopathic Medicine)</option>
+                  <option value="MS">MS (Master of Surgery)</option>
+                  <option value="DM">DM (Doctorate of Medicine)</option>
+                  <option value="MCh">MCh (Master of Chirurgiae)</option>
+                  <option value="DNB">DNB (Diplomate of National Board)</option>
+                  <option value="BDS">BDS (Bachelor of Dental Surgery)</option>
+                  <option value="MDS">MDS (Master of Dental Surgery)</option>
+                  <option value="BAMS">BAMS (Bachelor of Ayurvedic Medicine and Surgery)</option>
+                  <option value="BHMS">BHMS (Bachelor of Homeopathic Medicine and Surgery)</option>
+                  <option value="BPT">BPT (Bachelor of Physiotherapy)</option>
+                  <option value="MPT">MPT (Master of Physiotherapy)</option>
+                  <option value="PhD">PhD (Doctor of Philosophy)</option>
+                  <option value="Fellowship">Fellowship</option>
+              </select>
+          </div>
+          
+            <div class="mb-6">
               <label for="specialization" class="form-label fs-5">Select Service:</label>
               <select id="specialization" class="form-select fs-4" name="specialization" required>
                   <option value="" disabled selected>Select a Department</option>

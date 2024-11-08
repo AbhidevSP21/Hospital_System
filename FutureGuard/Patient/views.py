@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.models import User
-from .models import PatientProfile, feedback, Prediction
+from .models import PatientProfile, feedback, Prediction, Disease
 from django.contrib.auth.hashers import make_password
 import csv
 from django.conf import settings
@@ -108,6 +108,9 @@ from django.contrib import messages
 from datetime import datetime, timedelta
 from .models import Appointment  # Make sure to import your Appointment model
 
+
+
+
 def booking(request):
 
     if request.method == 'POST':
@@ -126,7 +129,9 @@ def booking(request):
         messages.success(request, "Appointment Saved!")
         return redirect('userprofile')
     else:
-        return render(request, 'Patient/Main/appointment.html', context={})
+        return render(request, 'Patient/Main/appointment.html',{
+            'appointments':appoinment
+        })
 
 
 
@@ -309,3 +314,58 @@ def checkEditTime(times, day, id):
         if Appointment.objects.filter(day=day, time=k).count() < 1 or time == k:
             x.append(k)
     return x
+
+
+# List of diseases and departments (same as in your CSV)
+data = [
+    ("Fungal infection", "Dermatology"),
+    ("Psoriasis", "Dermatology"),
+    ("Impetigo", "Dermatology"),
+    ("Acne", "Dermatology"),
+    ("Allergy", "Allergy and Immunology"),
+    ("Drug Reaction", "Allergy and Immunology"),
+    ("GERD", "Gastroenterology"),
+    ("Peptic ulcer disease", "Gastroenterology"),
+    ("Gastroenteritis", "Gastroenterology"),
+    ("Chronic cholestasis", "Gastroenterology"),
+    ("Jaundice", "Gastroenterology"),
+    ("Diabetes", "Endocrinology"),
+    ("Hypothyroidism", "Endocrinology"),
+    ("Hyperthyroidism", "Endocrinology"),
+    ("Hypoglycemia", "Endocrinology"),
+    ("Bronchial Asthma", "Pulmonology"),
+    ("Tuberculosis", "Pulmonology"),
+    ("Common Cold", "Pulmonology"),
+    ("Pneumonia", "Pulmonology"),
+    ("Covid", "Pulmonology"),
+    ("Hypertension", "Cardiology"),
+    ("Heart attack", "Cardiology"),
+    ("Migraine", "Neurology"),
+    ("Paralysis (brain hemorrhage)", "Neurology"),
+    ("Paroxysmal Positional Vertigo", "Neurology"),
+    ("AIDS", "Infectious Disease"),
+    ("Malaria", "Infectious Disease"),
+    ("Chicken pox", "Infectious Disease"),
+    ("Dengue", "Infectious Disease"),
+    ("Typhoid", "Infectious Disease"),
+    ("Covid", "Infectious Disease"),
+    ("Dengue", "Hematology"),
+    ("Hepatitis A", "Hepatology"),
+    ("Hepatitis B", "Hepatology"),
+    ("Hepatitis C", "Hepatology"),
+    ("Hepatitis D", "Hepatology"),
+    ("Hepatitis E", "Hepatology"),
+    ("Alcoholic hepatitis", "Hepatology"),
+    ("Osteoarthritis", "Orthopedics"),
+    ("Arthritis", "Orthopedics"),
+    ("Cervical spondylosis", "Orthopedics"),
+    ("Urinary tract infection", "Urology"),
+    ("Dimorphic hemorrhoids (piles)", "Proctology"),
+    ("Varicose veins", "Vascular Surgery")
+]
+
+# # Loop through the data and create Disease objects
+# for disease_name, department in data:
+#     Disease.objects.create(disease_name=disease_name, department=department)
+
+# print("Data added successfully!")
