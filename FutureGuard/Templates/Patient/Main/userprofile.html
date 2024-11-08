@@ -101,6 +101,9 @@
                         <div class="col-sm-6 mb-3">
                             <div class="card h-100">
                                 <div class="card-body">
+                                    
+                                    <!-- {{appoint}} -->
+
                                     <h6 class="d-flex align-items-center mb-3">My Bookings</h6>
                                     {% for i in appoint %}
                                     <small>{{i.day}} {{i.time}} {{i.service}}</small>
@@ -125,6 +128,13 @@
                                     
                                 </div>
                             </div>
+                        </div>
+                        <div class="container">
+                            {% for message in messages %}
+                                <div class="alert alert-{{ message.tags }}">
+                                    {{ message }}
+                                </div>
+                            {% endfor %}
                         </div>
                     </div>
                 </div>
