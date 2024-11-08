@@ -1,68 +1,414 @@
 {% extends 'Admin/baseAdmin.html' %}
 {% load static %}
 
-<!DOCTYPE html>
-<html lang="en">
-{% block content %}
+
+  {% block content %}
     <!-- Main Content -->
     <div class="main-content">
-        <!-- Navbar -->
-        <nav class="navbar navbar-expand-lg navbar-light mb-4">
-            <div class="container-fluid">
-                <span class="navbar-brand">Admin Dashboard</span>
-                <form class="d-flex">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-light" type="submit">Search</button>
-                </form>
-                <div class="d-flex">
-                    <img src="https://via.placeholder.com/40" alt="profile" class="rounded-circle me-2">
-                    <span>Admin</span>
-                </div>
-            </div>
-        </nav>
-
-        <!-- Metrics -->
-        <div class="row">
-            <div class="col-md-3">
-                <div class="metric">
-                    <i class="fas fa-users"></i>
-                    <h3>Departments</h3>
-                    <p id="totalDepartments">8</p>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="metric">
-                    <i class="fas fa-user-md"></i>
-                    <h3>Doctors</h3>
-                    <p> {{ total_doctors }}</p>
- <!-- Updated to show dynamic data -->
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="metric">
-                    <i class="fas fa-procedures"></i>
-                    <h3>Patients</h3>
-                    <p id="totalPatients">1</p>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="metric">
-                    <i class="fas fa-calendar-check"></i>
-                    <h3>Appointments</h3>
-                    <p id="totalAppointments">3</p>
-                </div>
-            </div>
+      <!-- Navbar -->
+      <nav class="navbar navbar-expand-lg navbar-light mb-4">
+        <div class="container-fluid">
+          <span class="navbar-brand">Admin Dashboard</span>
+          {% comment %} <div class="d-flex">
+            <img src="https://via.placeholder.com/40" alt="profile" class="rounded-circle me-2" />
+            <span>Admin</span>
+          </div> {% endcomment %}
         </div>
+      </nav>
 
-        <!-- Chart Section -->
-        <div class="row mt-4">
-            <div class="col-md-6">
-                <canvas id="monthlyRegisteredUsersChart"></canvas>
-            </div>
-            <div class="col-md-6">
-                <canvas id="earningsChart"></canvas>
-            </div>
+      <!-- Metrics -->
+      <div class="row">
+        <div class="col-md-3">
+          <div class="metric">
+            <i class="fas fa-users"></i>
+            <h3>Departments</h3>
+            <p id="totalDepartments">14</p>
+          </div>
         </div>
+        <div class="col-md-3">
+          <div class="metric">
+            <i class="fas fa-user-md"></i>
+            <h3>Doctors</h3>
+            <p>{{ total_doctors }}</p>
+            <!-- Updated to show dynamic data -->
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="metric">
+            <i class="fas fa-procedures"></i>
+            <h3>Patients</h3>
+            <p>{{ total_patients }}</p>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="metric">
+            <i class="fas fa-calendar-check"></i>
+            <h3>Appointments</h3>
+            <p> {{ total_appointments }}</p>
+          </div>
+        </div>
+      </div>
+
+      <figure class="highcharts-figure">
+        <div id="container"></div>
+        <p class="highcharts-description"></p>
+      </figure>
     </div>
-{% endblock content %}
-</html>
+
+    <script>
+   
+
+    // Charts using Chart.js
+    // Data retrieved from https://gs.statcounter.com/browser-market-share#monthly-202201-202201-bar
+    
+    // Create the chart
+    Highcharts.chart('container', {
+        chart: {
+            type: 'column'
+        },
+        title: {
+            align: 'left',
+            text: 'Department Wise Patients'
+        },
+        
+        accessibility: {
+            announceNewData: {
+                enabled: true
+            }
+        },
+        xAxis: {
+            type: 'category'
+        },
+        yAxis: {
+            title: {
+                text: 'Appointments'
+            }
+    
+        },
+        legend: {
+            enabled: false
+        },
+        plotOptions: {
+            series: {
+                borderWidth: 0,
+                dataLabels: {
+                    enabled: true,
+                    format: '{point.y:.0f}'
+                }
+            }
+        },
+    
+        tooltip: {
+            headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+            pointFormat: '<span style="color:{point.color}">{point.name}</span>: ' +
+                '<b>{point.y:.2f}%</b> of total<br/>'
+        },
+      
+        series: [
+            {
+                name: 'Department',
+                colorByPoint: true,
+                data: [
+                    {   
+                       
+                        name: 'Dermatology',
+                        y:{{ service_a_count }},
+                       
+                    },
+                    {
+                        name: 'Allergy and Immunology',
+                        y: {{ service_b_count }},
+                        
+                    },
+                    {
+                        name: 'Gastroenterology',
+                        y: {{ service_c_count }},
+                        
+                    },
+                    {
+                        name: 'Endocrinology',
+                        y: {{ service_d_count }},
+                        
+                    },
+                    {
+                        name: 'Pulmonology',
+                        y: {{ service_e_count }},
+                        
+                    },
+                    {
+                        name: 'Cardiology',
+                        y: {{ service_f_count }},
+                        
+                    },
+                    {
+                        name: 'Neurology',
+                        y: {{ service_g_count }},
+                        
+                    },
+                    {
+                        name: 'Infectious Disease',
+                        y: {{ service_h_count }},
+                        
+                    },
+                    {
+                        name: 'Hematology',
+                        y: {{ service_i_count }},
+                        
+                    },
+                    {
+                        name: 'Hepatology',
+                        y: {{ service_j_count }},
+                        
+                    },
+                    {
+                        name: 'Orthopedics',
+                        y: {{ service_k_count }},
+                        
+                    },
+                    {
+                        name: 'Urology',
+                        y: {{ service_l_count }},
+                        
+                    },
+                    {
+                        name: 'Proctology',
+                        y: {{ service_m_count }},
+                        
+                    },
+                    {
+                        name: 'Vascular Surgery',
+                        y: {{ service_n_count }},
+                        
+                    }
+                ]
+            }
+        ],
+        drilldown: {
+            breadcrumbs: {
+                position: {
+                    align: 'right'
+                }
+            },
+            series: [
+                {
+                    name: 'Chrome',
+                    id: 'Chrome',
+                    data: [
+                        [
+                            'v65.0',
+                            0.1
+                        ],
+                        [
+                            'v64.0',
+                            1.3
+                        ],
+                        [
+                            'v63.0',
+                            53.02
+                        ],
+                        [
+                            'v62.0',
+                            1.4
+                        ],
+                        [
+                            'v61.0',
+                            0.88
+                        ],
+                        [
+                            'v60.0',
+                            0.56
+                        ],
+                        [
+                            'v59.0',
+                            0.45
+                        ],
+                        [
+                            'v58.0',
+                            0.49
+                        ],
+                        [
+                            'v57.0',
+                            0.32
+                        ],
+                        [
+                            'v56.0',
+                            0.29
+                        ],
+                        [
+                            'v55.0',
+                            0.79
+                        ],
+                        [
+                            'v54.0',
+                            0.18
+                        ],
+                        [
+                            'v51.0',
+                            0.13
+                        ],
+                        [
+                            'v49.0',
+                            2.16
+                        ],
+                        [
+                            'v48.0',
+                            0.13
+                        ],
+                        [
+                            'v47.0',
+                            0.11
+                        ],
+                        [
+                            'v43.0',
+                            0.17
+                        ],
+                        [
+                            'v29.0',
+                            0.26
+                        ]
+                    ]
+                },
+                {
+                    name: 'Firefox',
+                    id: 'Firefox',
+                    data: [
+                        [
+                            'v58.0',
+                            1.02
+                        ],
+                        [
+                            'v57.0',
+                            7.36
+                        ],
+                        [
+                            'v56.0',
+                            0.35
+                        ],
+                        [
+                            'v55.0',
+                            0.11
+                        ],
+                        [
+                            'v54.0',
+                            0.1
+                        ],
+                        [
+                            'v52.0',
+                            0.95
+                        ],
+                        [
+                            'v51.0',
+                            0.15
+                        ],
+                        [
+                            'v50.0',
+                            0.1
+                        ],
+                        [
+                            'v48.0',
+                            0.31
+                        ],
+                        [
+                            'v47.0',
+                            0.12
+                        ]
+                    ]
+                },
+                {
+                    name: 'Internet Explorer',
+                    id: 'Internet Explorer',
+                    data: [
+                        [
+                            'v11.0',
+                            6.2
+                        ],
+                        [
+                            'v10.0',
+                            0.29
+                        ],
+                        [
+                            'v9.0',
+                            0.27
+                        ],
+                        [
+                            'v8.0',
+                            0.47
+                        ]
+                    ]
+                },
+                {
+                    name: 'Safari',
+                    id: 'Safari',
+                    data: [
+                        [
+                            'v11.0',
+                            3.39
+                        ],
+                        [
+                            'v10.1',
+                            0.96
+                        ],
+                        [
+                            'v10.0',
+                            0.36
+                        ],
+                        [
+                            'v9.1',
+                            0.54
+                        ],
+                        [
+                            'v9.0',
+                            0.13
+                        ],
+                        [
+                            'v5.1',
+                            0.2
+                        ]
+                    ]
+                },
+                {
+                    name: 'Edge',
+                    id: 'Edge',
+                    data: [
+                        [
+                            'v16',
+                            2.6
+                        ],
+                        [
+                            'v15',
+                            0.92
+                        ],
+                        [
+                            'v14',
+                            0.4
+                        ],
+                        [
+                            'v13',
+                            0.1
+                        ]
+                    ]
+                },
+                {
+                    name: 'Opera',
+                    id: 'Opera',
+                    data: [
+                        [
+                            'v50.0',
+                            0.96
+                        ],
+                        [
+                            'v49.0',
+                            0.82
+                        ],
+                        [
+                            'v12.1',
+                            0.14
+                        ]
+                    ]
+                }
+            ]
+        }
+    });
+    </script>
+
+  {% endblock %}

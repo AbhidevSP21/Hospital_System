@@ -5,6 +5,9 @@
 {% block content %}
     <div id="page-content" class="main-content">
         <h3 class="mb-4">Scheduled Appointments</h3>
+
+
+        <!-- Appointments Table -->
         <table class="table table-bordered">
             <thead>
                 <tr>
@@ -14,24 +17,21 @@
                     <th>Date</th>
                     <th>Time</th>
                     <th>Status</th>
-                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
                 <!-- Sample Data Row -->
+                {% for appoint in appoint %}
                 <tr>
-                    <td>1</td>
-                    <td>John Doe</td>
-                    <td>Dr. Smith</td>
-                    <td>2024-10-15</td>
-                    <td>10:00 AM</td>
-                    <td>Scheduled</td>
-                    <td>
-                        <a href="edit-appointment.html?id=1" class="btn btn-warning btn-sm">Edit</a>
-                        <button class="btn btn-danger btn-sm" onclick="confirmDelete(1)">Cancel</button>
-                    </td>
+                    <td>{{appoint.id}}</td>
+                    <td>{{appoint.user.first_name}}</td>
+                    <td>{{appoint.service}}</td>
+                    <td>{{appoint.day}}</td>
+                    <td>{{appoint.time}}</td>
+                    <td>{{appoint.status}}</td>
                 </tr>
                 <!-- Additional appointment rows would go here -->
+                  {% endfor %}
             </tbody>
         </table>
     </div>

@@ -11,8 +11,7 @@
                 <tr>
                     <th>Patient ID</th>
                     <th>Name</th>
-                    <th>Age</th>
-                    <th>Gender</th>
+                    <th>Date of Birth</th>
                     <th>Contact Info</th>
                     <th>Registration Date</th>
                     <th>Status</th>
@@ -21,20 +20,20 @@
             </thead>
             <tbody>
                 <!-- Sample Data Row -->
+                {% for patients in patients %}
                 <tr>
-                    <td>1</td>
-                    <td>John Doe</td>
-                    <td>30</td>
-                    <td>Male</td>
-                    <td>(123) 456-7890</td>
-                    <td>2024-01-15</td>
+                    <td>{{patients.id}}</td>
+                    <td>{{patients.user.first_name}}</td>
+                    <td>{{patients.dob}}</td>
+                    <td>{{patients.phone_no}}</td>
+                    <td>{{patients.user.date_joined}}</td>
                     <td>Active</td>
                     <td>
-                        <a href="edit-patient.html?id=1" class="btn btn-warning btn-sm">Edit</a>
-                        <button class="btn btn-danger btn-sm" onclick="confirmDelete(1)">Remove</button>
+                        <button class="btn btn-danger btn-sm"><a style="color:white; text-decoration: none;" href="{% url 'delete_patient' patient_id=patients.id %}">Remove</a></button>
                     </td>
                 </tr>
                 <!-- Additional patient rows would go here -->
+                {% endfor %}
             </tbody>
         </table>
     </div>
