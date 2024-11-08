@@ -2,71 +2,86 @@
 
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Future Guard - Admin Base Page</title>
     <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" />
     <!-- Custom CSS -->
-    <link href="{% static 'css/adminbase.css' %}" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="{% static 'css/adminbase.css' %}" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
 
     <!-- admin dashboard -->
-    <link rel="stylesheet" href="{% static "css/admindashboard.css" %}">
+    <link rel="stylesheet" href="{% static 'css/admindashboard.css' %}" />
     <!-- Chart.js library -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- admin appointments -->
-    <link rel="stylesheet" href="{% static "css/adminappointments.css" %}">
+    <link rel="stylesheet" href="{% static 'css/adminappointments.css' %}" />
     <!-- admin doctors -->
-    <link rel="stylesheet" href="{% static "css/admindoctors.css" %}">
+    <link rel="stylesheet" href="{% static 'css/admindoctors.css' %}" />
     <!-- admin patients -->
-    <link rel="stylesheet" href="{% static "css/adminpatients.css" %}">
+    <link rel="stylesheet" href="{% static 'css/adminpatients.css' %}" />
     <!-- admin settings -->
-    <link rel="stylesheet" href="{% static "css/adminsettings.css" %}">
+    <link rel="stylesheet" href="{% static 'css/adminsettings.css' %}" />
+    
 
-</head>
+      <!-- Chart Section -->
+      <script src="https://code.highcharts.com/highcharts.js"></script>
+      <script src="https://code.highcharts.com/modules/data.js"></script>
+      <script src="https://code.highcharts.com/modules/drilldown.js"></script>
+      <script src="https://code.highcharts.com/modules/exporting.js"></script>
+      <script src="https://code.highcharts.com/modules/export-data.js"></script>
+      <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+      
+  </head>
 
-<body>
-
+  <body>
     <!-- Sidebar -->
     <div class="sidebar">
-        <h3>Future Guard</h3>
-        <ul>
-        <li><a href="{% url 'admindashboard' %}"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
-        <li><a href="{% url 'admindoctors' %}"><i class="fas fa-user-md"></i> Doctors</a></li>
-        <li><a href="{% url 'adminpatients' %}"><i class="fas fa-user-injured"></i> Patients</a></li>
-        <li><a href="{% url 'adminappointments' %}"><i class="fas fa-calendar-check"></i> Appointments</a></li>
-        <li><a href="{% url 'adminsettings' %}"><i class="fas fa-cog"></i> Settings</a></li>
-        <li><a href="{% url 'adminlogout' %}"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
-        </ul>
+      <h3>Future Guard</h3>
+      <ul>
+        <li>
+          <a href="{% url 'admindashboard' %}"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+        </li>
+        <li>
+          <a href="{% url 'admindoctors' %}"><i class="fas fa-user-md"></i> Doctors</a>
+        </li>
+        <li>
+          <a href="{% url 'adminpatients' %}"><i class="fas fa-user-injured"></i> Patients</a>
+        </li>
+        <li>
+          <a href="{% url 'adminappointments' %}"><i class="fas fa-calendar-check"></i> Appointments</a>
+        </li>
+        <li>
+          <a href="{% url 'adminlogout' %}"><i class="fas fa-sign-out-alt"></i> Logout</a>
+        </li>
+      </ul>
     </div>
 
     {% block content %}
 
-    {% endblock content %}
+    {% endblock %}
 
     <!-- Footer -->
     {% comment %} <footer class="text-center mt-4">
-        <div class="container">
-            <p>© 2024 Future Guard | Contact: support@futureguard.com</p>
-        </div>
+      <div class="container">
+        <p>© 2024 Future Guard | Contact: support@futureguard.com</p>
+      </div>
     </footer> {% endcomment %}
 
-
     <!-- admin appointments -->
-    <script src="{% static "js/adminappointment.js" %}"></script>
+    <script src="{% static 'js/adminappointment.js' %}"></script>
     <!-- admin dashboard -->
-    <script src="{% static "js/admindashboard.js" %}"></script>
+    <script src="{% static 'js/admindashboard.js' %}"></script>
     <!-- admin patients -->
-    <script src="{% static "js/adminpatients.js" %}"></script>
+    <script src="{% static 'js/adminpatients.js' %}"></script>
     <!-- admin doctors -->
-    <script src="{% static "js/admindoctors.js" %}"></script>
+    <script src="{% static 'js/admindoctors.js' %}"></script>
 
     <!-- Bootstrap JS and dependencies -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-    
-</body>
-
+    <!-- Highcharts library -->
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+  </body>
 </html>

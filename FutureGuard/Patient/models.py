@@ -88,3 +88,5 @@ class Prediction(models.Model):
 
     def __str__(self):
         return f"Prediction for {self.predicted_disease} on {self.created_at}"
+
+
